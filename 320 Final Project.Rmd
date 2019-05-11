@@ -29,34 +29,39 @@ college_urls
 ```{r message=FALSE, warning=FALSE}
 index_num <- 0
 
-college_tab <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com",college_urls, sep = "")), 
+college_tab_1 <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com",college_urls, sep = "")), 
 "CollegeName"= "", "TuitionFees" = 0, "RoomBoard" = 0, "TotalEnrollment" = 0, "SchoolType" = "", "YearFounded" = 0, "Setting" = "", "Endowment2017" = 0, "MedianStartingSalaryOfAlumni" = 0, "Selectivity" = "", "Fall2017AcceptanceRate" = 0, "GenderDistribution" = 0, "FourYearGraduationRate" = 0, stringsAsFactors = FALSE) 
 
-college_tab
+college_tab_1
 ```
 
 
 ```{r}
 #retrieve data and populate fields of dataframe
+college_tab <- college_tab_1
 for (i in 1:nrow(college_tab)){
   url_html <- college_tab[i,1] %>%read_html()
   college_tab[i,]$CollegeName <- url_html %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
   college_tab[i,]$Fall2017AcceptanceRate <- url_html %>% html_node("span[data-test-id~=r_c_accept_rate]") %>% html_text()
+  college_tab[i,]$Selectivity <- url_html %>% html_node("span[data-test-id~=c_select_class]") %>% html_text()
 }
-#fix spacing of College Name
+#fix College Name formatting
 college_tab$CollegeName <- sub("^\n        ","",college_tab$CollegeName)
 college_tab$CollegeName <-sub("\n    ","",college_tab$CollegeName)
-#fixing Acceptance Rate
+#fixing Acceptance Rate formatting
 college_tab$Fall2017AcceptanceRate <- sub("\n            ","",college_tab$Fall2017AcceptanceRate)
 college_tab$Fall2017AcceptanceRate <- sub("%","",college_tab$Fall2017AcceptanceRate)
 college_tab$Fall2017AcceptanceRate <- as.double(college_tab$Fall2017AcceptanceRate)
 college_tab$Fall2017AcceptanceRate <- college_tab$Fall2017AcceptanceRate/100
-
+#fixing Selectivity formatting
+college_tab$Selectivity <- sub("\n            ","",college_tab$Selectivity)
+college_tab$Selectivity <- as.factor(college_tab$Selectivity)
 
 college_tab
 ```
 
 ```{r}
+college_tab[1,1] %>%read_html() %>% html_node("span[data-test-id~=c_select_class]") %>% html_text()
 
 ```
 
