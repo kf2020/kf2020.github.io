@@ -57,29 +57,27 @@ get_enrollment <- function(info){
   a_1 <- info[3] %>%  html_text()
   paste(substring(a_1, 1, str_locate(a_1, ",")[1] - 1), substring(a_1, str_locate(a_1, ",")[1] + 1), sep="")
 }
+```
 
-my_url <- "https://www.usnews.com/best-colleges/princeton-university-2627" %>% read_html()
 
-as.double(get_tuition_rm(get_info(my_url), 2))
-get_enrollment(get_info(my_url))
+```{r}
+college_tab <- college_tab_1
+
+for (i in 1:nrow(college_tab)){
+  url_html <- college_tab[i,1] %>%read_html()
+  college_tab[i,]$CollegeName <- url_html %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
+#  college_tab[i,]$TuitionFees <- as.double(get_tuition_rm(get_info(url_html), 1))
+#  college_tab[i,]$RoomBoard <- as.double(get_tuition_rm(get_info(url_html), 2))
+  college_tab[i,]$TotalEnrollment <- as.double(get_enrollment(get_info(url_html)))
+  college_tab[i,]$Fall2017AcceptanceRate <- url_html %>% html_node("span[data-test-id~=r_c_accept_rate]") %>% html_text()
+  college_tab[i,]$Selectivity <- url_html %>% html_node("span[data-test-id~=c_select_class]") %>% html_text()
+  college_tab[i,]$FourYearGraduationRate <- url_html %>% html_node("span[data-test-id~=grad_rate_4_year]") %>% html_text()
+}
 
 ```
 
 
 ```{r}
-for (i in 1:nrow(college_tab)){
-  url_html <- college_tab[i,1] %>%read_html()
-  college_tab[i,]$CollegeName <- url_html %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
-  college_tab[i,]$TuitionFees <- as.double(get_tuition_rm(get_info(url_html), 1))
-  college_tab[i,]$RoomBoard <- as.double(get_tuition_rm(get_info(url_html), 2))
-  college_tab[i,]$TotalEnrollment <- as.double(get_enrollment(get_info(url_html)))
-  
-  #row$Fall2017AcceptanceRate <- url %>% 
-
-  college_tab[i,]$Fall2017AcceptanceRate <- url_html %>% html_node("span[data-test-id~=r_c_accept_rate]") %>% html_text()
-  college_tab[i,]$Selectivity <- url_html %>% html_node("span[data-test-id~=c_select_class]") %>% html_text()
-}
-
 #fix College Name formatting
 college_tab$CollegeName <- sub("^\n        ","",college_tab$CollegeName)
 college_tab$CollegeName <-sub("\n    ","",college_tab$CollegeName)
@@ -88,9 +86,14 @@ college_tab$Fall2017AcceptanceRate <- sub("\n            ","",college_tab$Fall20
 college_tab$Fall2017AcceptanceRate <- sub("%","",college_tab$Fall2017AcceptanceRate)
 college_tab$Fall2017AcceptanceRate <- as.double(college_tab$Fall2017AcceptanceRate)
 college_tab$Fall2017AcceptanceRate <- college_tab$Fall2017AcceptanceRate/100
+#fixing Grad Rate formatting
+college_tab$FourYearGraduationRate <- sub("\n            ","",college_tab$FourYearGraduationRate)
+college_tab$FourYearGraduationRate <- sub("%","",college_tab$FourYearGraduationRate)
+college_tab$FourYearGraduationRate <- as.double(college_tab$FourYearGraduationRate)
+college_tab$FourYearGraduationRate <- college_tab$FourYearGraduationRate/100
 #fixing Selectivity formatting
-college_tab$Selectivity <- sub("\n            ","",college_tab$Selectivity)
-college_tab$Selectivity <- as.factor(college_tab$Selectivity)
+#college_tab$Selectivity <- sub("\n            ","",college_tab$Selectivity)
+#college_tab$Selectivity <- as.factor(college_tab$Selectivity)
 
 college_tab
 ```
@@ -98,4 +101,5 @@ college_tab
 
 
 ```{r}
+college_tab[i,1] %>%read_html() %>% html_node("span[data-test-id~=c_select_class]") %>% html_text()
 ```
