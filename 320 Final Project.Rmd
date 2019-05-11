@@ -1,11 +1,11 @@
 ---
-title: "320 Final Project"
+  title: "320 Final Project"
 author: "Amy, Katie, Shawdi"
 date: "5/11/2019"
 output: html_document
 ---
-
-```{r setup, include=FALSE}
+  
+  ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(stringr)
 ```
@@ -20,7 +20,7 @@ url <-"html_top100.txt"
 college_urls <- url %>%
   read_html() %>%
   html_node("body") %>% html_nodes("ol[class~=bEyEue]") %>% html_nodes("li[id]")%>% html_nodes("h3") %>% 
-html_nodes("a[href]") %>%
+  html_nodes("a[href]") %>%
   html_attr("href") 
 college_urls
 
@@ -31,7 +31,7 @@ college_urls
 index_num <- 0
 
 college_tab_1 <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com",college_urls, sep = "")), 
-"CollegeName"= "", "TuitionFees" = 0, "RoomBoard" = 0, "TotalEnrollment" = 0, "SchoolType" = "", "YearFounded" = 0, "Setting" = "", "Endowment2017" = 0, "MedianStartingSalaryOfAlumni" = 0, "Selectivity" = "", "Fall2017AcceptanceRate" = 0, "GenderDistribution" = 0, "FourYearGraduationRate" = 0, stringsAsFactors = FALSE) 
+                             "CollegeName"= "", "TuitionFees" = 0, "RoomBoard" = 0, "TotalEnrollment" = 0, "SchoolType" = "", "YearFounded" = 0, "Setting" = "", "Endowment2017" = 0, "MedianStartingSalaryOfAlumni" = 0, "Selectivity" = "", "Fall2017AcceptanceRate" = 0, "GenderDistribution" = 0, "FourYearGraduationRate" = 0, stringsAsFactors = FALSE) 
 
 college_tab_1
 ```
@@ -60,7 +60,7 @@ get_enrollment <- function(info){
 
 get_median_salary <- function(url_html) {
   output <- url_html %>% html_nodes("div[data-field-id=averageStartSalary]") %>%html_node("span[data-test-id]") %>% html_text()
-  if (nrow(output)<1) {
+  if (length(output) ==0) {
     0
   } else {
     output
@@ -116,5 +116,10 @@ college_tab
 
 
 ```{r}
-college_tab[i,1] %>%read_html() %>% html_nodes("div[data-field-id=averageStartSalary]") %>%html_node("span[data-test-id]") %>% html_text()
+#college_tab[1,1] %>%read_html() %>% html_nodes("div[data-field-id=averageStartSalary]") %>%html_node("span[data-test-id]") %>% html_text()
+for (i in 1:nrow(college_tab)){
+  url_html <- college_tab[i,1] %>%read_html()
+  this <- url_html %>% html_nodes("div[data-field-id=averageStartSalary]") %>%html_node("span[data-test-id]") %>% html_text()
+  print(this)
+}
 ```
