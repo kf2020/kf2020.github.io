@@ -37,13 +37,15 @@ college_tab
 
 ```{r}
 #retrieve data and populate fields of dataframe
-for (a in 1:nrow(college_tab)){
-  college_tab[a,2] <- college_tab[a,1] %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
-  
+for (i in 1:nrow(college_tab)){
+  row <- college_tab[i,]
+  url <- college_tab[i,1]
+  college_tab[i,]$CollegeName <- url %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
+  #college_tab[a,]$Fall2017AcceptanceRate <- college_tab[a,]$URL
 }
 #fix spacing of College Name
 college_tab$CollegeName <- sub("^\n        ","",college_tab$CollegeName)
-college_tab$CollegeName <-sub("\n    ","",college_tab$coll_name)
+college_tab$CollegeName <-sub("\n    ","",college_tab$CollegeName)
 
 college_tab
 ```
