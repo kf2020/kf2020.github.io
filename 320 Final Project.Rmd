@@ -7,6 +7,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(stringr)
 ```
 
 ## R Markdown
@@ -39,12 +40,45 @@ college_tab
 
 attach(college_tab)
 
+college_tab
+
+
 ```
 
-```{r}
+```{r message=FALSE, warning=FALSE}
 
-parse_data <- function(url, )
-  { 
+my_url <- "https://www.usnews.com/best-colleges/princeton-university-2627"
+parse_data <- function(url, row){
+  tuition <- my_url %>%
+    read_html() %>% html_node("body") %>% html_nodes("div[id~=content-main]") %>%   
+    html_nodes("section[class~=hero-stats-widget-stats]") %>%
+    html_nodes("ul") %>%
+    html_text() %>%
+    substring(regexpr("Fees $", tuition), regexpr("(2018-19)", tuition))
+}
+
+parse_data
+
+tuition <- my_url %>%
+    read_html() %>% html_node("body") %>% html_nodes("div[id~=content-main]") %>%   
+    html_nodes("section[class~=hero-stats-widget-stats]") %>%
+    html_nodes("ul") %>%
+    html_text() %>%
+    substring(regexpr("Fees $", tuition), regexpr("(2018-19)", tuition))
+
+tuition 
+
+```
+
+for (i in seq_len(nrow(college_tab)))
+{
+  the_url <- i.URL
+  parse_data(the_url, i)
+  
+}
+
+
+
 url_1 <- college_tab[1,]
 parsed_collegename <- url_1 %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
 
