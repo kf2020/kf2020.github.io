@@ -15,14 +15,13 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r message=FALSE, warning=FALSE}
 library(rvest)
 library(tidyverse)
-url <-"https://www.usnews.com/best-colleges/rankings/national-universities"
+url <-"2019 Best National Universities _ US News Rankings.html"
 college_tab <- url %>%
   read_html() %>%
-  html_node(".table") %>%
-  html_table()%>%
-  magrittr::set_colnames(c("rank", "flare_classification", "date", "flare_region",  "start_time", "maximum_time", "end_time", "movie"))
-as_tibble(flares_tab)
+  html_node("body") %>% html_nodes("ol[class~=bEyEue]") %>% html_nodes("li[id]")%>% html_nodes("h3") %>% 
+html_nodes("a[href]") %>%
+  html_attr("href") 
+
+college_tab
 
 ```
-
-
