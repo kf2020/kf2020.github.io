@@ -27,82 +27,61 @@ college_urls
 ```
 
 
-
-
 ```{r message=FALSE, warning=FALSE}
 index_num <- 0
 
 college_tab <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com",college_urls, sep = "")), 
-"CollegeName"= NA, "TuitionFees" = 0, "RoomBoard" = 0, "TotalEnrollment" = 0, "SchoolType" = NA, "YearFounded" = 0, "ReligiousAffiliation" = NA, "AcademicCalendar" = NA, "Setting" = NA, "Endowment2017" = 0, "MedianStartingSalaryOfAlumni" = 0, "Selectivity" = NA, "Fall2017AcceptanceRate" = 0, "GenderDistribution" = 0, "FourYearGraduationRate" = 0, stringsAsFactors = FALSE) 
-
-#college_tab$URL <- as.character(college_tab$URL)
-college_tab
-
-attach(college_tab)
+"CollegeName"= "", "TuitionFees" = 0, "RoomBoard" = 0, "TotalEnrollment" = 0, "SchoolType" = "", "YearFounded" = 0, "Setting" = "", "Endowment2017" = 0, "MedianStartingSalaryOfAlumni" = 0, "Selectivity" = "", "Fall2017AcceptanceRate" = 0, "GenderDistribution" = 0, "FourYearGraduationRate" = 0, stringsAsFactors = FALSE) 
 
 college_tab
-
-
 ```
 
 
 ```{r message=FALSE, warning=FALSE}
+#Shawdi start here
 
-my_url <- "https://www.usnews.com/best-colleges/princeton-university-2627"
-
-
-attr <- my_url %>%
-    read_html() %>% html_node("body") %>% html_nodes("div[id~=content-main]") %>%   
+get_info <- function(url){
+  attr <- url %>% html_node("body") %>% html_nodes("div[id~=content-main]") %>%   
     html_nodes("section[class~=hero-stats-widget-stats]") %>%
     html_nodes("ul") %>% html_nodes("li") %>% html_nodes("strong")
-
-for (i in 1:2){
-  #1: tuition, 2: room&board
-  factor <- attr[i] %>% html_text()
-  substring(factor, 2, str_locate(factor, " ")[1] - 1)
 }
 
+get_tuition_rm <- function(info, num){
+  a_1 <- info[num] %>%  html_text()
+  tuition_rm <- 
+    paste(substring(a_1, 2, str_locate(a_1, ",")[1] - 1), substring(a_1, str_locate(a_1, ",")[1] + 1, str_locate(a_1, " ")[1] - 1), sep="")
+  tuition_rm
+}
 
+get_enrollment <- function(info){
+  a_1 <- info[3] %>%  html_text()
+  paste(substring(a_1, 1, str_locate(a_1, ",")[1] - 1), substring(a_1, str_locate(a_1, ",")[1] + 1), sep="")
+}
 
-a_1 <- attr[1] %>%
-  html_text()
+my_url <- "https://www.usnews.com/best-colleges/princeton-university-2627" %>% read_html()
 
-a_1 <- attr[1] %>%
-  html_text()
-
-a_1 <- attr[1] %>%
-  html_text()
-
-tuition <- substring(a_1, 2, str_locate(a_1, " ")[1] - 1)
-
-tuition
-
-attr[3]
-
+as.double(get_tuition_rm(get_info(my_url), 2))
+get_enrollment(get_info(my_url))
 
 ```
-
 
 ```{r}
+#retrieve data and populate fields of dataframe
+for (i in 1:nrow(college_tab)){
+  url_html <- college_tab[i,1] %>%read_html()
+  college_tab[i,]$CollegeName <- url_html %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
+  college_tab[i,]$TuitionFees <- as.double(get_tuition_rm(get_info(url_html), 1))
+  college_tab[i,]$RoomBoard <- as.double(get_tuition_rm(get_info(url_html), 2))
+  college_tab[i,]$TotalEnrollment <- as.double(get_enrollment(get_info(url_html)))
+  
+  #row$Fall2017AcceptanceRate <- url %>% 
 
-college_tab <- college_tab %>% mutate(coll_name = sub("^\n", "", college_tab$CollegeName))
-college_sel <- college_tab %>% select(CollegeName, coll_name)
-college_sel$coll_name
-                                      
-                                      
-for (a in 1:nrow(college_tab)){
-  college_tab[a,2] <- sub("^\n", "")
 }
+#fix spacing of College Name
+college_tab$CollegeName <- sub("^\n        ","",college_tab$CollegeName)
+college_tab$CollegeName <-sub("\n    ","",college_tab$CollegeName)
 
 college_tab
-
-
-#parse_data <- function(url, )
- # { 
-#url_1 <- college_tab[1,]
-#parsed_collegename <- url_1 %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
-
-#parsed_collegename
-#}
-
 ```
+
+
