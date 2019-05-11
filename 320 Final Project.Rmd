@@ -57,21 +57,32 @@ get_enrollment <- function(info){
   a_1 <- info[3] %>%  html_text()
   paste(substring(a_1, 1, str_locate(a_1, ",")[1] - 1), substring(a_1, str_locate(a_1, ",")[1] + 1), sep="")
 }
+
+get_median_salary <- function(url_html) {
+  output <- url_html %>% html_nodes("div[data-field-id=averageStartSalary]") %>%html_node("span[data-test-id]") %>% html_text()
+  if (nrow(output)<1) {
+    0
+  } else {
+    output
+  }
+}
+
 ```
 
 
-```{r}
+```{r, message=FALSE, warning = FALSE}
 college_tab <- college_tab_1
 
 for (i in 1:nrow(college_tab)){
   url_html <- college_tab[i,1] %>%read_html()
   college_tab[i,]$CollegeName <- url_html %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
-#  college_tab[i,]$TuitionFees <- as.double(get_tuition_rm(get_info(url_html), 1))
-#  college_tab[i,]$RoomBoard <- as.double(get_tuition_rm(get_info(url_html), 2))
+  college_tab[i,]$TuitionFees <- as.double(get_tuition_rm(get_info(url_html), 1))
+  college_tab[i,]$RoomBoard <- as.double(get_tuition_rm(get_info(url_html), 2))
   college_tab[i,]$TotalEnrollment <- as.double(get_enrollment(get_info(url_html)))
   college_tab[i,]$Fall2017AcceptanceRate <- url_html %>% html_node("span[data-test-id~=r_c_accept_rate]") %>% html_text()
   college_tab[i,]$Selectivity <- url_html %>% html_node("span[data-test-id~=c_select_class]") %>% html_text()
   college_tab[i,]$FourYearGraduationRate <- url_html %>% html_node("span[data-test-id~=grad_rate_4_year]") %>% html_text()
+  college_tab[i,]$MedianStartingSalaryOfAlumni <- get_median_salary(url_html)
 }
 
 ```
@@ -91,9 +102,13 @@ college_tab$FourYearGraduationRate <- sub("\n            ","",college_tab$FourYe
 college_tab$FourYearGraduationRate <- sub("%","",college_tab$FourYearGraduationRate)
 college_tab$FourYearGraduationRate <- as.double(college_tab$FourYearGraduationRate)
 college_tab$FourYearGraduationRate <- college_tab$FourYearGraduationRate/100
+#fixing Grad Rate formatting
+college_tab$MedianStartingSalaryOfAlumni <- sub("\n            ","",college_tab$MedianStartingSalaryOfAlumni)
+college_tab$MedianStartingSalaryOfAlumni <- sub("*","",college_tab$MedianStartingSalaryOfAlumni)
+college_tab$MedianStartingSalaryOfAlumni <- as.double(college_tab$MedianStartingSalaryOfAlumni)
 #fixing Selectivity formatting
-#college_tab$Selectivity <- sub("\n            ","",college_tab$Selectivity)
-#college_tab$Selectivity <- as.factor(college_tab$Selectivity)
+college_tab$Selectivity <- sub("\n            ","",college_tab$Selectivity)
+college_tab$Selectivity <- as.factor(college_tab$Selectivity)
 
 college_tab
 ```
@@ -101,5 +116,5 @@ college_tab
 
 
 ```{r}
-college_tab[i,1] %>%read_html() %>% html_node("span[data-test-id~=c_select_class]") %>% html_text()
+college_tab[i,1] %>%read_html() %>% html_nodes("div[data-field-id=averageStartSalary]") %>%html_node("span[data-test-id]") %>% html_text()
 ```
