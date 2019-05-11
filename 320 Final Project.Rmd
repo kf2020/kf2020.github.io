@@ -55,6 +55,7 @@ for (a in 1:nrow(college_tab)){
 college_tab
 
 
+
 #parse_data <- function(url, )
  # { 
 #url_1 <- college_tab[1,]
@@ -63,4 +64,9 @@ college_tab
 #parsed_collegename
 #}
 
+```
+```{r}
+college_tab$CollegeName <- sub("^\n        ","",college_tab$CollegeName)
+college_tab$CollegeName <-sub("\n    ","",college_tab$coll_name)
+college_tab
 ```
