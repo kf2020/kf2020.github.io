@@ -26,47 +26,28 @@ college_urls
 ```
 
 
-
-
 ```{r message=FALSE, warning=FALSE}
 index_num <- 0
 
 college_tab <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com",college_urls, sep = "")), 
 "CollegeName"= "", "TuitionFees" = 0, "RoomBoard" = 0, "TotalEnrollment" = 0, "SchoolType" = "", "YearFounded" = 0, "Setting" = "", "Endowment2017" = 0, "MedianStartingSalaryOfAlumni" = 0, "Selectivity" = "", "Fall2017AcceptanceRate" = 0, "GenderDistribution" = 0, "FourYearGraduationRate" = 0, stringsAsFactors = FALSE) 
 
-#college_tab$URL <- as.character(college_tab$URL)
 college_tab
-
-attach(college_tab)
-
 ```
 
-parse_data <- function(a_url){
- 
-mutate(CollegeName <- a_url %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text())
-}
 ```{r}
-
-college_tab
+#retrieve data and populate fields of dataframe
 for (a in 1:nrow(college_tab)){
   college_tab[a,2] <- college_tab[a,1] %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
+  
 }
-
-college_tab
-
-
-
-#parse_data <- function(url, )
- # { 
-#url_1 <- college_tab[1,]
-#parsed_collegename <- url_1 %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
-
-#parsed_collegename
-#}
-
-```
-```{r}
+#fix spacing of College Name
 college_tab$CollegeName <- sub("^\n        ","",college_tab$CollegeName)
 college_tab$CollegeName <-sub("\n    ","",college_tab$coll_name)
+
 college_tab
+```
+
+```{r}
+
 ```
