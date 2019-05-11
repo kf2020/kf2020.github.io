@@ -32,7 +32,7 @@ college_urls
 index_num <- 0
 
 college_tab <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com",college_urls, sep = "")), 
-"CollegeName"= NA, "TuitionFees" = 0, "RoomBoard" = 0, "TotalEnrollment" = 0, "SchoolType" = NA, "YearFounded" = 0, "ReligiousAffiliation" = NA, "AcademicCalendar" = NA, "Setting" = NA, "Endowment2017" = 0, "MedianStartingSalaryOfAlumni" = 0, "Selectivity" = NA, "Fall2017AcceptanceRate" = 0, "GenderDistribution" = 0, "FourYearGraduationRate" = 0, stringsAsFactors = FALSE) 
+"CollegeName"= "", "TuitionFees" = 0, "RoomBoard" = 0, "TotalEnrollment" = 0, "SchoolType" = "", "YearFounded" = 0, "Setting" = "", "Endowment2017" = 0, "MedianStartingSalaryOfAlumni" = 0, "Selectivity" = "", "Fall2017AcceptanceRate" = 0, "GenderDistribution" = 0, "FourYearGraduationRate" = 0, stringsAsFactors = FALSE) 
 
 #college_tab$URL <- as.character(college_tab$URL)
 college_tab
