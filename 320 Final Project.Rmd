@@ -43,7 +43,6 @@ attach(college_tab)
 
 ```{r}
 
-
 parse_data <- function(url, )
   { 
 url_1 <- college_tab[1,]
