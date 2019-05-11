@@ -16,12 +16,36 @@ knitr::opts_chunk$set(echo = TRUE)
 library(rvest)
 library(tidyverse)
 url <-"2019 Best National Universities _ US News Rankings.html"
-college_tab <- url %>%
+college_urls <- url %>%
   read_html() %>%
   html_node("body") %>% html_nodes("ol[class~=bEyEue]") %>% html_nodes("li[id]")%>% html_nodes("h3") %>% 
 html_nodes("a[href]") %>%
   html_attr("href") 
+college_urls
 
+```
+"CollegeName", "Tuition&Fees", "Room&Board", "TotalEnrollment", "SchoolType(Priv/Pub)", "YearFounded", "ReligiousAffiliation", "AcademicCalendar", "Setting", "2017Endowment", "MedianStartingSalaryOfAlumni", "Selectivity", "Fall2017 AcceptanceRate", "GenderDistribution", "4-yearGraduationRate")
+
+```{r message=FALSE, warning=FALSE}
+index_num <- 0
+
+college_tab <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com",college_urls, sep = "")), stringsAsFactors = FALSE) 
+
+#college_tab$URL <- as.character(college_tab$URL)
 college_tab
+
+
+attach(college_tab)
+
+
+url <- "https://www.usnews.com/best-colleges/princeton-university-2627"
+typeof(college_tab[1]$URL)
+paste("", college_tab[1]$URL,"")
+parsed_collegename <- gsub(" ","",college_tab$URL) 
+
+parsed_collegename<- paste("", parsed_collegename ,"") %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% 
+html_text()
+parsed_collegename
+
 
 ```
