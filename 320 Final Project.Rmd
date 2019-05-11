@@ -35,19 +35,29 @@ college_tab <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com",
 college_tab
 ```
 
+
 ```{r}
 #retrieve data and populate fields of dataframe
 for (i in 1:nrow(college_tab)){
-  row <- college_tab[i,]
   url_html <- college_tab[i,1] %>%read_html()
-  row$CollegeName <- url_html %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
-  #row$Fall2017AcceptanceRate <- url %>% 
+  college_tab[i,]$CollegeName <- url_html %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
+  college_tab[i,]$Fall2017AcceptanceRate <- url_html %>% html_node("span[data-test-id~=r_c_accept_rate]") %>% html_text()
 }
 #fix spacing of College Name
 college_tab$CollegeName <- sub("^\n        ","",college_tab$CollegeName)
 college_tab$CollegeName <-sub("\n    ","",college_tab$CollegeName)
+#fixing Acceptance Rate
+college_tab$Fall2017AcceptanceRate <- sub("\n            ","",college_tab$Fall2017AcceptanceRate)
+college_tab$Fall2017AcceptanceRate <- sub("%","",college_tab$Fall2017AcceptanceRate)
+college_tab$Fall2017AcceptanceRate <- as.double(college_tab$Fall2017AcceptanceRate)
+college_tab$Fall2017AcceptanceRate <- college_tab$Fall2017AcceptanceRate/100
+
 
 college_tab
+```
+
+```{r}
+
 ```
 
 ```{r}
