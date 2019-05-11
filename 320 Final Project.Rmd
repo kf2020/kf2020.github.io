@@ -31,48 +31,21 @@ college_urls
 index_num <- 0
 
 college_tab_1 <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com",college_urls, sep = "")), 
-"CollegeName"= "", "TuitionFees" = 0, "RoomBoard" = 0, "TotalEnrollment" = 0, "SchoolType" = "", "YearFounded" = 0, "Setting" = "", "Endowment2017" = 0, "MedianStartingSalaryOfAlumni" = 0, "Selectivity" = "", "Fall2017AcceptanceRate" = 0, "GenderDistribution" = 0, "FourYearGraduationRate" = 0, stringsAsFactors = FALSE) 
+"CollegeName"= "", "TuitionFees" = 0, "RoomBoard" = 0, "TotalEnrollment" = 0, "SchoolType" = "", "YearFounded" = 0, "Setting" = "", "Endowment2017" = 0, "MedianStartingSalaryOfAlumni" = 0, "Selectivity" = "", "Fall2017AcceptanceRate" = 0, "MalePercentage" = 0, "FourYearGraduationRate" = 0, stringsAsFactors = FALSE) 
 
 college_tab_1
 ```
 
-
-```{r message=FALSE, warning=FALSE}
-#Shawdi start here
-
-get_info <- function(url){
-  attr <- url %>% html_node("body") %>% html_nodes("div[id~=content-main]") %>%   
-    html_nodes("section[class~=hero-stats-widget-stats]") %>%
-    html_nodes("ul") %>% html_nodes("li") %>% html_nodes("strong")
-}
-
-get_tuition_rm <- function(info, num){
-  a_1 <- info[num] %>%  html_text()
-  tuition_rm <- 
-    paste(substring(a_1, 2, str_locate(a_1, ",")[1] - 1), substring(a_1, str_locate(a_1, ",")[1] + 1, str_locate(a_1, " ")[1] - 1), sep="")
-  tuition_rm
-}
-
-get_enrollment <- function(info){
-  a_1 <- info[3] %>%  html_text()
-  paste(substring(a_1, 1, str_locate(a_1, ",")[1] - 1), substring(a_1, str_locate(a_1, ",")[1] + 1), sep="")
-}
-
-my_url <- "https://www.usnews.com/best-colleges/princeton-university-2627" %>% read_html()
-
-as.double(get_tuition_rm(get_info(my_url), 2))
-get_enrollment(get_info(my_url))
-
-```
 
 
 ```{r}
 for (i in 1:nrow(college_tab)){
   url_html <- college_tab[i,1] %>%read_html()
   college_tab[i,]$CollegeName <- url_html %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
-  college_tab[i,]$TuitionFees <- as.double(get_tuition_rm(get_info(url_html), 1))
-  college_tab[i,]$RoomBoard <- as.double(get_tuition_rm(get_info(url_html), 2))
-  college_tab[i,]$TotalEnrollment <- as.double(get_enrollment(get_info(url_html)))
+  college_tab[i,]$TuitionFees <- get_tuition_rm(get_info(url_html), 1)
+  college_tab[i,]$RoomBoard <- get_tuition_rm(get_info(url_html), 2)
+  college_tab[i,]$TotalEnrollment <- get_enrollment(get_info(url_html))
+  college_tab[i,]$GenderDistribution <- get_gender_ratio(url_html)
   
   #row$Fall2017AcceptanceRate <- url %>% 
 
@@ -97,5 +70,4 @@ college_tab
 
 
 
-```{r}
-```
+
