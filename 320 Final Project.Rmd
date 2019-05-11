@@ -40,7 +40,7 @@ college_tab
 for (i in 1:nrow(college_tab)){
   row <- college_tab[i,]
   url <- college_tab[i,1]
-  college_tab[i,]$CollegeName <- url %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
+  row$CollegeName <- url %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
   #college_tab[a,]$Fall2017AcceptanceRate <- college_tab[a,]$URL
 }
 #fix spacing of College Name
