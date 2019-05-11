@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r message=FALSE, warning=FALSE}
 library(rvest)
 library(tidyverse)
-url <-"2019 Best National Universities _ US News Rankings.html"
+url <-"html_top100.txt"
 college_urls <- url %>%
   read_html() %>%
   html_node("body") %>% html_nodes("ol[class~=bEyEue]") %>% html_nodes("li[id]")%>% html_nodes("h3") %>% 
@@ -43,12 +43,23 @@ attach(college_tab)
 
 ```{r}
 
-parse_data <- function(url, )
-  { 
-url_1 <- college_tab[1,]
-parsed_collegename <- url_1 %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
 
-parsed_collegename
+parse_data <- function(a_url){
+ 
+mutate(CollegeName <- a_url %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text())
 }
+
+ apply(college_tab, 1, parse_data(URL))
+
+college_tab
+
+
+#parse_data <- function(url, )
+ # { 
+#url_1 <- college_tab[1,]
+#parsed_collegename <- url_1 %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
+
+#parsed_collegename
+#}
 
 ```
