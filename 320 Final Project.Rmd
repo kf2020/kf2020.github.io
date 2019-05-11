@@ -24,27 +24,32 @@ html_nodes("a[href]") %>%
 college_urls
 
 ```
-"CollegeName", "Tuition&Fees", "Room&Board", "TotalEnrollment", "SchoolType(Priv/Pub)", "YearFounded", "ReligiousAffiliation", "AcademicCalendar", "Setting", "2017Endowment", "MedianStartingSalaryOfAlumni", "Selectivity", "Fall2017 AcceptanceRate", "GenderDistribution", "4-yearGraduationRate")
+
+
+
 
 ```{r message=FALSE, warning=FALSE}
 index_num <- 0
 
-college_tab <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com",college_urls, sep = "")), stringsAsFactors = FALSE) 
+college_tab <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com",college_urls, sep = "")), 
+"CollegeName"= NA, "TuitionFees" = 0, "RoomBoard" = 0, "TotalEnrollment" = 0, "SchoolType" = NA, "YearFounded" = 0, "ReligiousAffiliation" = NA, "AcademicCalendar" = NA, "Setting" = NA, "Endowment2017" = 0, "MedianStartingSalaryOfAlumni" = 0, "Selectivity" = NA, "Fall2017AcceptanceRate" = 0, "GenderDistribution" = 0, "FourYearGraduationRate" = 0, stringsAsFactors = FALSE) 
 
 #college_tab$URL <- as.character(college_tab$URL)
 college_tab
 
 attach(college_tab)
-typeof(college_tab[1]$URL)
 
 ```
 
 ```{r}
 
-parse_data <- function{} 
+
+parse_data <- function(url, )
+  { 
 url_1 <- college_tab[1,]
 parsed_collegename <- url_1 %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
 
 parsed_collegename
+}
 
 ```
