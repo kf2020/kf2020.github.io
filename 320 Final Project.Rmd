@@ -34,18 +34,17 @@ college_tab <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com",
 #college_tab$URL <- as.character(college_tab$URL)
 college_tab
 
-
 attach(college_tab)
-
-
-url <- "https://www.usnews.com/best-colleges/princeton-university-2627"
 typeof(college_tab[1]$URL)
-paste("", college_tab[1]$URL,"")
-parsed_collegename <- gsub(" ","",college_tab$URL) 
 
-parsed_collegename<- paste("", parsed_collegename ,"") %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% 
-html_text()
+```
+
+```{r}
+
+parse_data <- function{} 
+url_1 <- college_tab[1,]
+parsed_collegename <- url_1 %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
+
 parsed_collegename
-
 
 ```
