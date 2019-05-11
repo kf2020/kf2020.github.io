@@ -39,9 +39,9 @@ college_tab
 #retrieve data and populate fields of dataframe
 for (i in 1:nrow(college_tab)){
   row <- college_tab[i,]
-  url <- college_tab[i,1]
-  row$CollegeName <- url %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
-  #college_tab[a,]$Fall2017AcceptanceRate <- college_tab[a,]$URL
+  url_html <- college_tab[i,1] %>%read_html()
+  row$CollegeName <- url_html %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
+  #row$Fall2017AcceptanceRate <- url %>% 
 }
 #fix spacing of College Name
 college_tab$CollegeName <- sub("^\n        ","",college_tab$CollegeName)
