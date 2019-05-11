@@ -30,7 +30,7 @@ college_urls
 index_num <- 0
 
 college_tab <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com",college_urls, sep = "")), 
-"CollegeName"= "", "TuitionFees" = 0, "RoomBoard" = 0, "TotalEnrollment" = 0, "SchoolType" = "", "YearFounded" = 0, "Setting" = "", "Endowment2017" = 0, "MedianStartingSalaryOfAlumni" = 0, "Selectivity" = "", "Fall2017AcceptanceRate" = 0, "GenderDistribution" = 0, "FourYearGraduationRate" = 0, stringsAsFactors = FALSE) 
+"CollegeName"= "", "TuitionFees" = 0, "RoomBoard" = 0, "TotalEnrollment" = 0, "SchoolType" = "", "YearFounded" = 0, "Setting" = "", "Endowment2017(Millions)" = 0, "MedianStartingSalaryOfAlumni" = 0, "Selectivity" = "", "Fall2017AcceptanceRate" = 0, "GenderDistribution" = 0, "FourYearGraduationRate" = 0, stringsAsFactors = FALSE) 
 
 college_tab
 ```
@@ -56,10 +56,34 @@ college_tab$Fall2017AcceptanceRate <- college_tab$Fall2017AcceptanceRate/100
 college_tab
 ```
 
+
 ```{r}
+#Amy
+#Setting
+#retrieve data and populate fields of dataframe
+
+for (i in 1:nrow(college_tab)){
+  url_html <- college_tab[i,1] %>%read_html()
+  temp_vector <- url_html %>% html_node("body") %>% html_nodes("div[id~=content-main]") %>%html_nodes("div[class~=flex-row]") %>%   html_nodes("span[class~=heading-small]") %>% html_text()
+  college_tab[i,]$SchoolType <- temp_vector[1]
+  college_tab[i,]$YearFounded <- temp_vector[2]
+  college_tab[i,]$Setting <- temp_vector[5]
+  college_tab[i,]$Endowment2017(Millions) <- temp_vector[6]
+
+}
+college_tab$SchoolType <- as.factor(college_tab$SchoolType)
+college_tab$Setting <- as.factor(college_tab$Setting)
+college_tab$YearFounded <- as.integer(college_tab$YearFounded)
+
+
+college_tab$Endowment2017(Millions) <-sub("[[:punct:]]", "",college_tab$Endowment2017(Millions))
+college_tab$Endowment2017(Millions) <-sub(" \\+", "",college_tab$Endowment2017(Millions))
+
+college_tab$Endowment2017(Millions) <- ifelse(grepl("billion", college_tab$Endowment2017(Millions)), sub("\\.","",college_tab$Endowment2017(Millions)),college_tab$Endowment2017(Millions))
+college_tab$Endowment2017(Millions) <-sub(" billion","00",college_tab$Endowment2017(Millions))
+college_tab$Endowment2017(Millions) <-sub(" million","",college_tab$Endowment2017(Millions))
+
+college_tab
 
 ```
 
-```{r}
-
-```
