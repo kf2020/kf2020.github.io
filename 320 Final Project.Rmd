@@ -40,23 +40,28 @@ college_tab_1
 ```{r message=FALSE, warning=FALSE}
 #Shawdi start here
 
-get_info <- function(url){
-  attr <- url %>% html_node("body") %>% html_nodes("div[id~=content-main]") %>%   
+#retrieves of vector of size three containing the Tuition&Fees, Room&Board, and total enrollment
+get_info <- function(url_html){
+  attr <- url_html %>% html_node("body") %>% html_nodes("div[id~=content-main]") %>%   
     html_nodes("section[class~=hero-stats-widget-stats]") %>%
     html_nodes("ul") %>% html_nodes("li") %>% html_nodes("strong")
 }
 
+#takes in a vector and index, and parses that information to a double
+#ex: $47,263 -> 47263.0
 get_tuition_rm <- function(info, num){
   a_1 <- info[num] %>%  html_text()
   tuition_rm <- 
-    paste(substring(a_1, 2, str_locate(a_1, ",")[1] - 1), substring(a_1, str_locate(a_1, ",")[1] + 1, str_locate(a_1, " ")[1] - 1), sep="")
+    as.double(paste(substring(a_1, 2, str_locate(a_1, ",")[1] - 1), substring(a_1, str_locate(a_1, ",")[1] + 1, str_locate(a_1, " ")[1] - 1), sep=""))
   tuition_rm
 }
 
+#takes in a vector and parses the total enrollment information to a double
 get_enrollment <- function(info){
   a_1 <- info[3] %>%  html_text()
-  paste(substring(a_1, 1, str_locate(a_1, ",")[1] - 1), substring(a_1, str_locate(a_1, ",")[1] + 1), sep="")
+  as.double(paste(substring(a_1, 1, str_locate(a_1, ",")[1] - 1), substring(a_1, str_locate(a_1, ",")[1] + 1), sep=""))
 }
+
 
 get_median_salary <- function(url_html) {
   output <- url_html %>% html_nodes("div[data-field-id=averageStartSalary]") %>%html_node("span[data-test-id]") %>% html_text()
@@ -67,6 +72,39 @@ get_median_salary <- function(url_html) {
   }
 }
 
+
+my_url <- "https://www.usnews.com/best-colleges/princeton-university-2627" %>% read_html()
+
+get_tuition_rm(get_info(my_url), 2)
+get_enrollment(get_info(my_url))
+
+```
+
+```{r}
+
+#gets the percentage of the majority gender at a certain university
+get_percent <- function(url_html){
+  attr <- url_html %>% html_node("body") %>% html_nodes("div[id~=content-main]") %>%   
+    html_nodes("div[class~=block-normal]") %>% html_nodes("span[class~=distribution-breakdown__percentage]") %>% html_text()
+  as.double(substring(attr, 1, str_locate(attr, "%")[1] - 1)) / 100.0
+}
+
+#retrieves the gender of the majority sex and parses the percentage to be in terms of males
+get_gender_ratio <- function(url_html){
+  attr <- url_html %>% html_node("body") %>% html_nodes("div[id~=content-main]") %>%   
+    html_nodes("div[class~=block-normal]") %>% html_nodes("span[class~=distribution-breakdown__percentage-copy]") %>% html_text()
+  attr <- sub("\n                    ","",attr)
+  attr <- sub("\n                ","",attr)
+  if (attr == "Female"){
+    1 - get_percent(url_html)
+  }else{
+    get_percent(url_html)
+  }
+  
+}
+
+get_percent(my_url)
+get_gender_ratio(my_url)
 ```
 
 
@@ -76,9 +114,11 @@ college_tab <- college_tab_1
 for (i in 1:nrow(college_tab)){
   url_html <- college_tab[i,1] %>%read_html()
   college_tab[i,]$CollegeName <- url_html %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
-  college_tab[i,]$TuitionFees <- as.double(get_tuition_rm(get_info(url_html), 1))
-  college_tab[i,]$RoomBoard <- as.double(get_tuition_rm(get_info(url_html), 2))
-  college_tab[i,]$TotalEnrollment <- as.double(get_enrollment(get_info(url_html)))
+  college_tab[i,]$TuitionFees <- get_tuition_rm(get_info(url_html), 1)
+  college_tab[i,]$RoomBoard <- get_tuition_rm(get_info(url_html), 2)
+  college_tab[i,]$TotalEnrollment <- get_enrollment(get_info(url_html))
+  college_tab[i,]$MalePercentage <- get_gender_ratio(url_html)
+
   college_tab[i,]$Fall2017AcceptanceRate <- url_html %>% html_node("span[data-test-id~=r_c_accept_rate]") %>% html_text()
   college_tab[i,]$Selectivity <- url_html %>% html_node("span[data-test-id~=c_select_class]") %>% html_text()
   college_tab[i,]$FourYearGraduationRate <- url_html %>% html_node("span[data-test-id~=grad_rate_4_year]") %>% html_text()
@@ -123,3 +163,4 @@ for (i in 1:nrow(college_tab)){
   print(this)
 }
 ```
+
