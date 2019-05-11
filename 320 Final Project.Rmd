@@ -64,10 +64,6 @@ get_enrollment <- function(info){
   as.double(paste(substring(a_1, 1, str_locate(a_1, ",")[1] - 1), substring(a_1, str_locate(a_1, ",")[1] + 1), sep=""))
 }
 
-```
-
-```{r}
-
 #gets the percentage of the majority gender at a certain university
 get_percent <- function(url_html){
   attr <- url_html %>% html_node("body") %>% html_nodes("div[id~=content-main]") %>%   
