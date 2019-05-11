@@ -1,0 +1,28 @@
+---
+title: "320 Final Project"
+author: "Amy, Katie, Shawdi"
+date: "5/11/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+
+```{r message=FALSE, warning=FALSE}
+library(rvest)
+library(tidyverse)
+url <-"https://www.usnews.com/best-colleges/rankings/national-universities"
+college_tab <- url %>%
+  read_html() %>%
+  html_node(".table") %>%
+  html_table()%>%
+  magrittr::set_colnames(c("rank", "flare_classification", "date", "flare_region",  "start_time", "maximum_time", "end_time", "movie"))
+as_tibble(flares_tab)
+
+```
+
+
