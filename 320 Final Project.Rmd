@@ -41,15 +41,16 @@ attach(college_tab)
 
 ```
 
-```{r}
-
-
 parse_data <- function(a_url){
  
 mutate(CollegeName <- a_url %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text())
 }
+```{r}
 
- apply(college_tab, 1, parse_data(URL))
+college_tab
+for (a in 1:nrow(college_tab)){
+  college_tab[a,2] <- college_tab[a,1] %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
+}
 
 college_tab
 
