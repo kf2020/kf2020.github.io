@@ -16,7 +16,7 @@ library(stringr)
 ```{r message=FALSE, warning=FALSE}
 library(rvest)
 library(tidyverse)
-url <-"2019 Best National Universities _ US News Rankings.html"
+url <-"html_top100.txt"
 college_urls <- url %>%
   read_html() %>%
   html_node("body") %>% html_nodes("ol[class~=bEyEue]") %>% html_nodes("li[id]")%>% html_nodes("h3") %>% 
@@ -45,44 +45,64 @@ college_tab
 
 ```
 
+
 ```{r message=FALSE, warning=FALSE}
 
 my_url <- "https://www.usnews.com/best-colleges/princeton-university-2627"
-parse_data <- function(url, row){
-  tuition <- my_url %>%
+
+
+attr <- my_url %>%
     read_html() %>% html_node("body") %>% html_nodes("div[id~=content-main]") %>%   
     html_nodes("section[class~=hero-stats-widget-stats]") %>%
-    html_nodes("ul") %>%
-    html_text() %>%
-    substring(regexpr("Fees $", tuition), regexpr("(2018-19)", tuition))
+    html_nodes("ul") %>% html_nodes("li") %>% html_nodes("strong")
+
+for (i in 1:2){
+  #1: tuition, 2: room&board
+  factor <- attr[i] %>% html_text()
+  substring(factor, 2, str_locate(factor, " ")[1] - 1)
 }
 
-parse_data
 
-tuition <- my_url %>%
-    read_html() %>% html_node("body") %>% html_nodes("div[id~=content-main]") %>%   
-    html_nodes("section[class~=hero-stats-widget-stats]") %>%
-    html_nodes("ul") %>%
-    html_text() %>%
-    substring(regexpr("Fees $", tuition), regexpr("(2018-19)", tuition))
 
-tuition 
+a_1 <- attr[1] %>%
+  html_text()
+
+a_1 <- attr[1] %>%
+  html_text()
+
+a_1 <- attr[1] %>%
+  html_text()
+
+tuition <- substring(a_1, 2, str_locate(a_1, " ")[1] - 1)
+
+tuition
+
+attr[3]
+
 
 ```
 
-for (i in seq_len(nrow(college_tab)))
-{
-  the_url <- i.URL
-  parse_data(the_url, i)
-  
+
+```{r}
+
+college_tab <- college_tab %>% mutate(coll_name = sub("^\n", "", college_tab$CollegeName))
+college_sel <- college_tab %>% select(CollegeName, coll_name)
+college_sel$coll_name
+                                      
+                                      
+for (a in 1:nrow(college_tab)){
+  college_tab[a,2] <- sub("^\n", "")
 }
 
+college_tab
 
 
-url_1 <- college_tab[1,]
-parsed_collegename <- url_1 %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
+#parse_data <- function(url, )
+ # { 
+#url_1 <- college_tab[1,]
+#parsed_collegename <- url_1 %>% read_html() %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
 
-parsed_collegename
-}
+#parsed_collegename
+#}
 
 ```
