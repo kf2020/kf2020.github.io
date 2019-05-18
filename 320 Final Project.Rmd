@@ -152,6 +152,8 @@ formatted_college_tab$MedianStartingSalaryOfAlumniThousands <- as.double(formatt
 formatted_college_tab$Selectivity <- sub("\n            ","",formatted_college_tab$Selectivity)
 formatted_college_tab$Selectivity <- as.factor(formatted_college_tab$Selectivity)
 
+formatted_college_tab <- formatted_college_tab %>% mutate(TotalCostThousands =TuitionFeesThousands + RoomBoardThousands )
+
 formatted_college_tab
 ```
 
@@ -166,4 +168,109 @@ formatted_college_tab$Endowment2017Millions  <-sub("\\$", "",formatted_college_t
 formatted_college_tab$Endowment2017Millions  <-sub(" \\+", "",formatted_college_tab$Endowment2017Millions )
 formatted_college_tab$Endowment2017Millions
 ```
+
+
+
+
+
+
+
+#r EDAvisualization
+```{r fig1, fig.height = 10, fig.width = 12}
+#Starting Salary
+#-histograms
+library(ggplot2)
+plot_1 <- formatted_college_tab %>%
+  ggplot(aes(MedianStartingSalaryOfAlumniThousands)) +
+    geom_histogram()+ 
+    labs(title="Starting Salary Distribution", x="Median Starting Salary of Alumni (Thousands)", y="Count")
+plot_1
+
+```
+
+The distribution of the median starting salary of alumni from all the school seems to be a bell-shaped curve, centering around $55,000.
+
+
+
+```{r fig2, fig.height = 10, fig.width = 12}
+
+#Tuition Cost
+#-histograms
+library(ggplot2)
+plot_2 <- formatted_college_tab %>%
+  ggplot(aes(TuitionFeesThousands)) +
+    geom_histogram()+ 
+        labs(title="Tuition Cost Distribution", x="Tuition Cost (Thousands)", y="Count")
+plot_2
+
+```
+
+The distribution of tution costs of all the schools is bimodal, with a range of $60,000. 
+
+```{r fig3, fig.height = 10, fig.width = 12}
+#Acceptance rate vs graduation rate
+
+library(ggplot2)
+plot_3 <- formatted_college_tab %>%
+  ggplot(aes(x=Fall2017AcceptanceRate, y=FourYearGraduationRate)) +
+    geom_point()+ 
+    geom_smooth(method=lm)+
+        labs(title="Acceptance Vs. Graduation Rate", x="Fall 2017 Acceptance Rate", y="Four Year Graduation Rate")
+plot_3
+```
+There is a linear relationship between acceptance rate (Fall 2017) and the four year graduation rate. It is an overall negative relationship. The more selective, the lower the rate of graduation. 
+
+
+```{r fig4, fig.height = 10, fig.width = 12}
+#Boxplots of (1) gradrate & (2) admission rate by selectivity 
+
+library(ggplot2)
+plot_4 <- formatted_college_tab %>%
+  ggplot(aes(x=Selectivity, y=FourYearGraduationRate)) +
+    geom_boxplot()+
+        labs(title="Graduation Rate based on Selectivity", x="Selectivity Level", y="Four Year Graduation Rate")
+plot_4
+
+```
+This is significant difference in four year graduation rates based on their Selectivity Level of accepting students. These boxplots show that each 3 selectivity level vary significantly on range and central tendency. The more selective a college is, the greater their graduation rates seem to be. 
+
+```{r fig5, fig.height = 10, fig.width = 12}
+#Setting vs. room board
+
+library(ggplot2)
+plot_5 <- formatted_college_tab %>%
+  ggplot(aes(x=Setting, y=RoomBoardThousands)) +
+    geom_boxplot()+
+        labs(title="Setting vs. Room & Board Costs", x="Setting", y="Room & Board Costs (Thousands)")
+plot_5
+
+```
+The boxplots of room & board costs based on setting shows that the setting of the college does influence the room and board costs for the students. The medians vary greatly. The interquartile spreads seems to be similar while the overall ranges vary.
+
+```{r fig6, fig.height = 10, fig.width = 12}
+plot_6 <- formatted_college_tab %>%
+  ggplot(aes(x=TotalCostThousand, y=MedianStartingSalaryOfAlumniThousands)) +
+    geom_point()+ 
+    geom_smooth(method=lm)+
+        labs(title="Total Cost vs. Median Starting Salary", x="Total Cost (Thousand)", y="Median Starting Salary Of Alumni (Thousands)")
+plot_6
+```
+
+There appears to be a positive linear relatinoship between median starting salary and total cost of colleges. The general trends shows that the more students spend on tution and room & board, the more likely that their starting salary is higher. 
+
+```{r fig7, fig.height = 10, fig.width = 12}
+plot_7 <- formatted_college_tab %>%
+  ggplot(aes(x=SchoolType, y=MedianStartingSalaryOfAlumniThousands  
+)) +
+    geom_boxplot()+
+        labs(title="Median Starting Salary Of Alumni Based on School Type  ", x="School Type", y="Median Starting Salary Of Alumni (Thousands)")
+plot_7
+```
+Between school types, private colleges seem to have greater starting salaries than public schools, based on the medians of these boxplots. 
+```{r}
+ formatted_college_tab %>% group_by(Selectivity) %>%
+  summarise(n())
+```
+
+
 
