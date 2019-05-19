@@ -1,110 +1,110 @@
-"","URL","CollegeName","TuitionFeesThousands","RoomBoardThousands","TotalEnrollment","SchoolType","YearFounded","Setting","Endowment2017Millions","MedianStartingSalaryOfAlumniThousands","Selectivity","Fall2017AcceptanceRate","MalePercentage","FourYearGraduationRate"
-"1","https://www.usnews.com/best-colleges/princeton-university-2627","Princeton University",47.14,15.61,8273,"Private, Coed",1746,"Suburban","23400",68.4,"Most selective",0.06,0.51,0.89
-"2","https://www.usnews.com/best-colleges/harvard-university-2155","Harvard University",50.42,17.16,20604,"Private, Coed",1636,"Urban","37100",66.5,"Most selective",0.05,0.52,0.84
-"3","https://www.usnews.com/best-colleges/columbia-university-2707","Columbia University",59.43,14.016,25968,"Private, Coed",1754,"Urban","10000",64.9,"Most selective",0.06,0.52,0.88
-"4","https://www.usnews.com/best-colleges/massachusetts-institute-of-technology-2178","Massachusetts Institute of Technology",51.832,15.51,11466,"Private, Coed",1861,"Urban","14800",79.8,"Most selective",0.07,0.54,0.85
-"5","https://www.usnews.com/best-colleges/university-of-chicago-1774","University of Chicago",57.006,16.35,13736,"Private, Coed",1890,"Urban","6600",57.7,"Most selective",0.09,0.51,0.88
-"6","https://www.usnews.com/best-colleges/yale-university-1426","Yale University",53.43,16,12974,"Private, Coed",1701,"City","27200",63.2,"Most selective",0.07,0.5,0.87
-"7","https://www.usnews.com/best-colleges/stanford-university-1305","Stanford University",51.354,15.763,17178,"Private, Coed",1885,"Suburban","24800",70.7,"Most selective",0.05,0.5,0.75
-"8","https://www.usnews.com/best-colleges/duke-university-2920","Duke University",55.96,15.944,16294,"Private, Coed",1838,"Suburban","7900",66.2,"Most selective",0.1,0.5,0.88
-"9","https://www.usnews.com/best-colleges/university-of-pennsylvania-3378","University of Pennsylvania",55.584,15.616,21907,"Private, Coed",1740,"Urban","12200",66.1,"Most selective",0.09,0.49,0.86
-"10","https://www.usnews.com/best-colleges/jhu-2077","Johns Hopkins University",53.74,15.836,25151,"Private, Coed",1876,"Urban","3700",63.4,"Most selective",0.12,0.48,0.88
-"11","https://www.usnews.com/best-colleges/northwestern-university-1739","Northwestern University",54.567,16.626,21474,"Private, Coed",1851,"Suburban","7900",58.8,"Most selective",0.09,0.5,0.84
-"12","https://www.usnews.com/best-colleges/california-institute-of-technology-1131","California Institute of Technology",52.362,15.525,2238,"Private, Coed",1891,"Suburban","2600",81,"Most selective",0.08,0.55,0.79
-"13","https://www.usnews.com/best-colleges/dartmouth-college-2573","Dartmouth College",55.035,15.756,6509,"Private, Coed",1769,"Rural","5000",63.8,"Most selective",0.1,0.51,0.88
-"14","https://www.usnews.com/best-colleges/brown-university-3401","Brown University",55.656,14.67,10095,"Private, Coed",1764,"City","3200",60.3,"Most selective",0.09,0.46,0.86
-"15","https://www.usnews.com/best-colleges/vanderbilt-3535","Vanderbilt University",49.816,16.234,12592,"Private, Coed",1873,"Urban","4100",61.4,"Most selective",0.11,0.49,0.86
-"16","https://www.usnews.com/best-colleges/cornell-university-2711","",0,0,0,"",0,"","0",0,"",0,0,0
-"17","https://www.usnews.com/best-colleges/rice-3604","",0,0,0,"",0,"","0",0,"",0,0,0
-"18","https://www.usnews.com/best-colleges/university-of-notre-dame-1840","",0,0,0,"",0,"","0",0,"",0,0,0
-"19","https://www.usnews.com/best-colleges/university-of-california-los-angeles-1315","",0,0,0,"",0,"","0",0,"",0,0,0
-"20","https://www.usnews.com/best-colleges/washington-university-in-st-louis-2520","",0,0,0,"",0,"","0",0,"",0,0,0
-"21","https://www.usnews.com/best-colleges/emory-university-1564","",0,0,0,"",0,"","0",0,"",0,0,0
-"22","https://www.usnews.com/best-colleges/georgetown-university-1445","",0,0,0,"",0,"","0",0,"",0,0,0
-"23","https://www.usnews.com/best-colleges/university-of-california-berkeley-1312","",0,0,0,"",0,"","0",0,"",0,0,0
-"24","https://www.usnews.com/best-colleges/university-of-southern-california-1328","",0,0,0,"",0,"","0",0,"",0,0,0
-"25","https://www.usnews.com/best-colleges/carnegie-mellon-university-3242","",0,0,0,"",0,"","0",0,"",0,0,0
-"26","https://www.usnews.com/best-colleges/uva-6968","",0,0,0,"",0,"","0",0,"",0,0,0
-"27","https://www.usnews.com/best-colleges/tufts-university-2219","",0,0,0,"",0,"","0",0,"",0,0,0
-"28","https://www.usnews.com/best-colleges/university-of-michigan-ann-arbor-9092","",0,0,0,"",0,"","0",0,"",0,0,0
-"29","https://www.usnews.com/best-colleges/wake-forest-2978","",0,0,0,"",0,"","0",0,"",0,0,0
-"30","https://www.usnews.com/best-colleges/nyu-2785","",0,0,0,"",0,"","0",0,"",0,0,0
-"31","https://www.usnews.com/best-colleges/university-of-california-santa-barbara-1320","",0,0,0,"",0,"","0",0,"",0,0,0
-"32","https://www.usnews.com/best-colleges/unc-2974","",0,0,0,"",0,"","0",0,"",0,0,0
-"33","https://www.usnews.com/best-colleges/university-of-california-irvine-1314","",0,0,0,"",0,"","0",0,"",0,0,0
-"34","https://www.usnews.com/best-colleges/university-of-rochester-2894","",0,0,0,"",0,"","0",0,"",0,0,0
-"35","https://www.usnews.com/best-colleges/brandeis-university-2133","",0,0,0,"",0,"","0",0,"",0,0,0
-"36","https://www.usnews.com/best-colleges/georgia-institute-of-technology-1569","",0,0,0,"",0,"","0",0,"",0,0,0
-"37","https://www.usnews.com/best-colleges/university-of-florida-1535","",0,0,0,"",0,"","0",0,"",0,0,0
-"38","https://www.usnews.com/best-colleges/boston-college-2128","",0,0,0,"",0,"","0",0,"",0,0,0
-"39","https://www.usnews.com/best-colleges/william-and-mary-3705","",0,0,0,"",0,"","0",0,"",0,0,0
-"41","https://www.usnews.com/best-colleges/university-of-california-san-diego-1317","",0,0,0,"",0,"","0",0,"",0,0,0
-"42","https://www.usnews.com/best-colleges/boston-university-2130","",0,0,0,"",0,"","0",0,"",0,0,0
-"43","https://www.usnews.com/best-colleges/case-western-reserve-university-3024","",0,0,0,"",0,"","0",0,"",0,0,0
-"44","https://www.usnews.com/best-colleges/northeastern-university-2199","",0,0,0,"",0,"","0",0,"",0,0,0
-"45","https://www.usnews.com/best-colleges/tulane-university-2029","",0,0,0,"",0,"","0",0,"",0,0,0
-"46","https://www.usnews.com/best-colleges/pepperdine-university-1264","",0,0,0,"",0,"","0",0,"",0,0,0
-"47","https://www.usnews.com/best-colleges/university-of-georgia-1598","",0,0,0,"",0,"","0",0,"",0,0,0
-"48","https://www.usnews.com/best-colleges/university-of-illinois-urbanachampaign-1775","",0,0,0,"",0,"","0",0,"",0,0,0
-"49","https://www.usnews.com/best-colleges/rpi-2803","",0,0,0,"",0,"","0",0,"",0,0,0
-"50","https://www.usnews.com/best-colleges/university-of-texas-3658","",0,0,0,"",0,"","0",0,"",0,0,0
-"51","https://www.usnews.com/best-colleges/university-of-wisconsin-3895","",0,0,0,"",0,"","0",0,"",0,0,0
-"52","https://www.usnews.com/best-colleges/villanova-3388","",0,0,0,"",0,"","0",0,"",0,0,0
-"53","https://www.usnews.com/best-colleges/lehigh-university-3289","",0,0,0,"",0,"","0",0,"",0,0,0
-"54","https://www.usnews.com/best-colleges/syracuse-university-2882","",0,0,0,"",0,"","0",0,"",0,0,0
-"55","https://www.usnews.com/best-colleges/university-of-miami-1536","",0,0,0,"",0,"","0",0,"",0,0,0
-"56","https://www.usnews.com/best-colleges/ohio-state-6883","",0,0,0,"",0,"","0",0,"",0,0,0
-"57","https://www.usnews.com/best-colleges/purdue-university-west-lafayette-1825","",0,0,0,"",0,"","0",0,"",0,0,0
-"58","https://www.usnews.com/best-colleges/rutgers-new-brunswick-6964","",0,0,0,"",0,"","0",0,"",0,0,0
-"59","https://www.usnews.com/best-colleges/penn-state-6965","",0,0,0,"",0,"","0",0,"",0,0,0
-"60","https://www.usnews.com/best-colleges/smu-3613","",0,0,0,"",0,"","0",0,"",0,0,0
-"61","https://www.usnews.com/best-colleges/university-of-washington-3798","",0,0,0,"",0,"","0",0,"",0,0,0
-"62","https://www.usnews.com/best-colleges/wpi-2233","",0,0,0,"",0,"","0",0,"",0,0,0
-"63","https://www.usnews.com/best-colleges/george-washington-university-1444","",0,0,0,"",0,"","0",0,"",0,0,0
-"64","https://www.usnews.com/best-colleges/uconn-29013","",0,0,0,"",0,"","0",0,"",0,0,0
-"65","https://www.usnews.com/best-colleges/university-of-maryland-2103","",0,0,0,"",0,"","0",0,"",0,0,0
-"66","https://www.usnews.com/best-colleges/byu-3670","",0,0,0,"",0,"","0",0,"",0,0,0
-"67","https://www.usnews.com/best-colleges/clark-university-massachusetts-2139","",0,0,0,"",0,"","0",0,"",0,0,0
-"68","https://www.usnews.com/best-colleges/clemson-university-3425","",0,0,0,"",0,"","0",0,"",0,0,0
-"69","https://www.usnews.com/best-colleges/texas-am-university-college-station-10366","",0,0,0,"",0,"","0",0,"",0,0,0
-"70","https://www.usnews.com/best-colleges/florida-state-university-1489","",0,0,0,"",0,"","0",0,"",0,0,0
-"71","https://www.usnews.com/best-colleges/fordham-university-2722","",0,0,0,"",0,"","0",0,"",0,0,0
-"72","https://www.usnews.com/best-colleges/stevens-institute-of-technology-2639","",0,0,0,"",0,"","0",0,"",0,0,0
-"73","https://www.usnews.com/best-colleges/university-of-california-santa-cruz-1321","",0,0,0,"",0,"","0",0,"",0,0,0
-"74","https://www.usnews.com/best-colleges/umass-amherst-2221","",0,0,0,"",0,"","0",0,"",0,0,0
-"75","https://www.usnews.com/best-colleges/university-of-pittsburgh-3379","",0,0,0,"",0,"","0",0,"",0,0,0
-"76","https://www.usnews.com/best-colleges/university-of-minnesota-twin-cities-3969","",0,0,0,"",0,"","0",0,"",0,0,0
-"77","https://www.usnews.com/best-colleges/virginia-tech-3754","",0,0,0,"",0,"","0",0,"",0,0,0
-"78","https://www.usnews.com/best-colleges/american-university-1434","",0,0,0,"",0,"","0",0,"",0,0,0
-"79","https://www.usnews.com/best-colleges/baylor-university-6967","",0,0,0,"",0,"","0",0,"",0,0,0
-"80","https://www.usnews.com/best-colleges/suny-binghamton-2836","",0,0,0,"",0,"","0",0,"",0,0,0
-"81","https://www.usnews.com/best-colleges/colorado-school-of-mines-1348","",0,0,0,"",0,"","0",0,"",0,0,0
-"82","https://www.usnews.com/best-colleges/north-carolina-state-raleigh-2972","",0,0,0,"",0,"","0",0,"",0,0,0
-"83","https://www.usnews.com/best-colleges/stony-brook-suny-2838","",0,0,0,"",0,"","0",0,"",0,0,0
-"84","https://www.usnews.com/best-colleges/tcu-3636","",0,0,0,"",0,"","0",0,"",0,0,0
-"85","https://www.usnews.com/best-colleges/yeshiva-university-2903","",0,0,0,"",0,"","0",0,"",0,0,0
-"86","https://www.usnews.com/best-colleges/michigan-state-2290","",0,0,0,"",0,"","0",0,"",0,0,0
-"87","https://www.usnews.com/best-colleges/university-of-california-riverside-1316","",0,0,0,"",0,"","0",0,"",0,0,0
-"88","https://www.usnews.com/best-colleges/university-of-san-diego-10395","",0,0,0,"",0,"","0",0,"",0,0,0
-"89","https://www.usnews.com/best-colleges/howard-university-1448","",0,0,0,"",0,"","0",0,"",0,0,0
-"90","https://www.usnews.com/best-colleges/indiana-university-bloomington-1809","",0,0,0,"",0,"","0",0,"",0,0,0
-"91","https://www.usnews.com/best-colleges/loyola-university-chicago-1710","",0,0,0,"",0,"","0",0,"",0,0,0
-"92","https://www.usnews.com/best-colleges/marquette-university-3863","",0,0,0,"",0,"","0",0,"",0,0,0
-"93","https://www.usnews.com/best-colleges/ub-9554","",0,0,0,"",0,"","0",0,"",0,0,0
-"94","https://www.usnews.com/best-colleges/university-of-delaware-1431","",0,0,0,"",0,"","0",0,"",0,0,0
-"95","https://www.usnews.com/best-colleges/university-of-iowa-1892","",0,0,0,"",0,"","0",0,"",0,0,0
-"96","https://www.usnews.com/best-colleges/illinois-institute-of-technology-1691","",0,0,0,"",0,"","0",0,"",0,0,0
-"97","https://www.usnews.com/best-colleges/miami-university-7104","",0,0,0,"",0,"","0",0,"",0,0,0
-"98","https://www.usnews.com/best-colleges/university-of-colorado-boulder-1370","",0,0,0,"",0,"","0",0,"",0,0,0
-"99","https://www.usnews.com/best-colleges/university-of-denver-1371","",0,0,0,"",0,"","0",0,"",0,0,0
-"100","https://www.usnews.com/best-colleges/university-of-san-francisco-1325","",0,0,0,"",0,"","0",0,"",0,0,0
-"101","https://www.usnews.com/best-colleges/university-of-vermont-3696","",0,0,0,"",0,"","0",0,"",0,0,0
-"102","https://www.usnews.com/best-colleges/clarkson-university-2699","",0,0,0,"",0,"","0",0,"",0,0,0
-"103","https://www.usnews.com/best-colleges/drexel-university-3256","",0,0,0,"",0,"","0",0,"",0,0,0
-"104","https://www.usnews.com/best-colleges/rit-2806","",0,0,0,"",0,"","0",0,"",0,0,0
-"105","https://www.usnews.com/best-colleges/university-of-oregon-3223","",0,0,0,"",0,"","0",0,"",0,0,0
-"106","https://www.usnews.com/best-colleges/njit-2621","",0,0,0,"",0,"","0",0,"",0,0,0
-"107","https://www.usnews.com/best-colleges/st-louis-university-2506","",0,0,0,"",0,"","0",0,"",0,0,0
-"108","https://www.usnews.com/best-colleges/suny-environmental-science-and-forestry-2851","",0,0,0,"",0,"","0",0,"",0,0,0
-"109","https://www.usnews.com/best-colleges/temple-university-3371","",0,0,0,"",0,"","0",0,"",0,0,0
-"110","https://www.usnews.com/best-colleges/university-of-arizona-1083","",0,0,0,"",0,"","0",0,"",0,0,0
+"","URL","CollegeName","TuitionFeesThousands","RoomBoardThousands","TotalEnrollment","SchoolType","YearFounded","Setting","Endowment2017Millions","MedianStartingSalaryOfAlumniThousands","Selectivity","Fall2017AcceptanceRate","MalePercentage","FourYearGraduationRate","TotalCostThousands"
+"1","https://www.usnews.com/best-colleges/princeton-university-2627","Princeton University",47.14,15.61,8273,"Private, Coed",1746,"Suburban","23400",68.4,"Most selective",0.06,0.51,0.89,62.75
+"2","https://www.usnews.com/best-colleges/harvard-university-2155","Harvard University",50.42,17.16,20604,"Private, Coed",1636,"Urban","37100",66.5,"Most selective",0.05,0.52,0.84,67.58
+"3","https://www.usnews.com/best-colleges/columbia-university-2707","Columbia University",59.43,14.016,25968,"Private, Coed",1754,"Urban","10000",64.9,"Most selective",0.06,0.52,0.88,73.446
+"4","https://www.usnews.com/best-colleges/massachusetts-institute-of-technology-2178","Massachusetts Institute of Technology",51.832,15.51,11466,"Private, Coed",1861,"Urban","14800",79.8,"Most selective",0.07,0.54,0.85,67.342
+"5","https://www.usnews.com/best-colleges/university-of-chicago-1774","University of Chicago",57.006,16.35,13736,"Private, Coed",1890,"Urban","6600",57.7,"Most selective",0.09,0.51,0.88,73.356
+"6","https://www.usnews.com/best-colleges/yale-university-1426","Yale University",53.43,16,12974,"Private, Coed",1701,"City","27200",63.2,"Most selective",0.07,0.5,0.87,69.43
+"7","https://www.usnews.com/best-colleges/stanford-university-1305","Stanford University",51.354,15.763,17178,"Private, Coed",1885,"Suburban","24800",70.7,"Most selective",0.05,0.5,0.75,67.117
+"8","https://www.usnews.com/best-colleges/duke-university-2920","Duke University",55.96,15.944,16294,"Private, Coed",1838,"Suburban","7900",66.2,"Most selective",0.1,0.5,0.88,71.904
+"9","https://www.usnews.com/best-colleges/university-of-pennsylvania-3378","University of Pennsylvania",55.584,15.616,21907,"Private, Coed",1740,"Urban","12200",66.1,"Most selective",0.09,0.49,0.86,71.2
+"10","https://www.usnews.com/best-colleges/jhu-2077","Johns Hopkins University",53.74,15.836,25151,"Private, Coed",1876,"Urban","3700",63.4,"Most selective",0.12,0.48,0.88,69.576
+"11","https://www.usnews.com/best-colleges/northwestern-university-1739","Northwestern University",54.567,16.626,21474,"Private, Coed",1851,"Suburban","7900",58.8,"Most selective",0.09,0.5,0.84,71.193
+"12","https://www.usnews.com/best-colleges/california-institute-of-technology-1131","California Institute of Technology",52.362,15.525,2238,"Private, Coed",1891,"Suburban","2600",81,"Most selective",0.08,0.55,0.79,67.887
+"13","https://www.usnews.com/best-colleges/dartmouth-college-2573","Dartmouth College",55.035,15.756,6509,"Private, Coed",1769,"Rural","5000",63.8,"Most selective",0.1,0.51,0.88,70.791
+"14","https://www.usnews.com/best-colleges/brown-university-3401","Brown University",55.656,14.67,10095,"Private, Coed",1764,"City","3200",60.3,"Most selective",0.09,0.46,0.86,70.326
+"15","https://www.usnews.com/best-colleges/vanderbilt-3535","Vanderbilt University",49.816,16.234,12592,"Private, Coed",1873,"Urban","4100",61.4,"Most selective",0.11,0.49,0.86,66.05
+"16","https://www.usnews.com/best-colleges/cornell-university-2711","Cornell University",55.188,14.816,23016,"Private, Coed",1865,"Rural","6500",65,"Most selective",0.13,0.48,0.85,70.004
+"17","https://www.usnews.com/best-colleges/rice-3604","Rice University",47.35,14,7022,"Private, Coed",1912,"Urban","5800",64.9,"Most selective",0.16,0.53,0.83,61.35
+"18","https://www.usnews.com/best-colleges/university-of-notre-dame-1840","University of Notre Dame",53.391,15.41,12467,"Private, Coed",1842,"City","9700",62.7,"Most selective",0.19,0.53,0.9,68.801
+"19","https://www.usnews.com/best-colleges/university-of-california-los-angeles-1315","University of California--Los Angeles",41.294,15.991,45428,"Public, Coed",1919,"Urban","4200",56.6,"Most selective",0.16,0.43,0.75,57.285
+"20","https://www.usnews.com/best-colleges/washington-university-in-st-louis-2520","Washington University in St. Louis",53.399,16.44,15303,"Private, Coed",1853,"Suburban","7200",60.3,"Most selective",0.16,0.46,0.88,69.839
+"21","https://www.usnews.com/best-colleges/emory-university-1564","Emory University",51.306,14.456,14273,"Private, Coed",1836,"City","7600",57.9,"Most selective",0.22,0.4,0.82,65.762
+"22","https://www.usnews.com/best-colleges/georgetown-university-1445","Georgetown University",54.104,16.418,19005,"Private, Coed",1789,"Urban","1700",57.9,"Most selective",0.16,0.44,0.9,70.522
+"23","https://www.usnews.com/best-colleges/university-of-california-berkeley-1312","University of California--Berkeley",43.232,17.764,41910,"Public, Coed",1868,"City","4400",64.3,"Most selective",0.17,0.47,0.76,60.996
+"24","https://www.usnews.com/best-colleges/university-of-southern-california-1328","University of Southern California",56.225,15.4,36487,"Private, Coed",1880,"Urban","5100",58.1,"Most selective",0.16,0.48,0.77,71.625
+"25","https://www.usnews.com/best-colleges/carnegie-mellon-university-3242","Carnegie Mellon University",55.465,14.418,14528,"Private, Coed",1900,"Urban","1700",71.6,"Most selective",0.22,0.51,0.76,69.883
+"26","https://www.usnews.com/best-colleges/uva-6968","University of Virginia",48.891,11.59,24360,"Public, Coed",1819,"Suburban","6300",59.6,"Most selective",0.27,0.45,0.88,60.481
+"27","https://www.usnews.com/best-colleges/tufts-university-2219","Tufts University",56.382,14.56,11449,"Private, Coed",1852,"Suburban","1700",59.3,"Most selective",0.15,0.49,0.87,70.942
+"28","https://www.usnews.com/best-colleges/university-of-michigan-ann-arbor-9092","University of Michigan--Ann Arbor",49.35,11.534,46002,"Public, Coed",1817,"City","10800",61.9,"More selective",0.27,0.5,0.77,60.884
+"29","https://www.usnews.com/best-colleges/wake-forest-2978","Wake Forest University",53.322,16.032,8116,"Private, Coed",1834,"Suburban","1200",54.1,"Most selective",0.28,0.46,0.84,69.354
+"30","https://www.usnews.com/best-colleges/nyu-2785","New York University",51.828,18.156,51123,"Private, Coed",1831,"Urban","4100",57.4,"Most selective",0.28,0.43,0.75,69.984
+"31","https://www.usnews.com/best-colleges/university-of-california-santa-barbara-1320","University of California--Santa Barbara",42.486,15.673,25057,"Public, Coed",1909,"Suburban","332.4",53.8,"Most selective",0.33,0.46,0.7,58.159
+"32","https://www.usnews.com/best-colleges/unc-2974","University of North Carolina--Chapel Hill",35.169,11.19,29911,"Public, Coed",1789,"Suburban","2900",49.6,"Most selective",0.24,0.41,0.84,46.359
+"33","https://www.usnews.com/best-colleges/university-of-california-irvine-1314","University of California--Irvine",NA,NA,35242,"Public, Coed",1965,"Suburban","853.3",54.5,"More selective",0.37,0.47,0.7,NA
+"34","https://www.usnews.com/best-colleges/university-of-rochester-2894","University of Rochester",53.926,15.938,11648,"Private, Coed",1850,"Suburban","2100",54.6,"More selective",0.34,0.5,0.77,69.864
+"35","https://www.usnews.com/best-colleges/brandeis-university-2133","Brandeis University",55.395,15.44,5722,"Private, Coed",1948,"Suburban","976.9",52.9,"Most selective",0.34,0.41,0.83,70.835
+"36","https://www.usnews.com/best-colleges/georgia-institute-of-technology-1569","Georgia Institute of Technology",33.02,14.596,29376,"Public, Coed",1885,"Urban","2000",68.1,"Most selective",0.23,0.62,0.39,47.616
+"37","https://www.usnews.com/best-colleges/university-of-florida-1535","University of Florida",28.658,10.12,52669,"Public, Coed",1853,"Suburban","1600",52.8,"Most selective",0.42,0.44,0.68,38.778
+"38","https://www.usnews.com/best-colleges/boston-college-2128","Boston College",55.464,14.478,13996,"Private, Coed",1863,"Suburban","2300",57.9,"Most selective",0.32,0.47,0.88,69.942
+"39","https://www.usnews.com/best-colleges/william-and-mary-3705","College of William and Mary",44.701,12.236,8740,"Public, Coed",1693,"Suburban","874.1",53.4,"Most selective",0.36,0.42,0.85,56.937
+"40","https://www.usnews.com/best-colleges/university-of-california-san-diego-1317","University of California--San Diego",42.074,13.733,35772,"Public, Coed",1960,"Urban","1400",58,"Most selective",0.34,0.51,0.55,55.807
+"41","https://www.usnews.com/best-colleges/boston-university-2130","Boston University",53.948,15.72,33355,"Private, Coed",1839,"Urban","2000",55.2,"Most selective",0.25,0.4,0.81,69.668
+"42","https://www.usnews.com/best-colleges/case-western-reserve-university-3024","Case Western Reserve University",49.042,15.19,11824,"Private, Coed",1826,"Urban","1800",63,"Most selective",0.33,0.55,0.66,64.232
+"43","https://www.usnews.com/best-colleges/northeastern-university-2199","Northeastern University",51.387,16.88,21489,"Private, Coed",1898,"Urban","795.9",60.1,"Most selective",0.27,0.49,0,68.267
+"44","https://www.usnews.com/best-colleges/tulane-university-2029","Tulane University",54.82,15.19,11248,"Private, Coed",1834,"Urban","1300",50.2,"Most selective",0.21,0.41,0.73,70.01
+"45","https://www.usnews.com/best-colleges/pepperdine-university-1264","Pepperdine University",53.932,15.32,7710,"Private, Coed",1937,"Suburban","860.3",52.2,"More selective",0.4,0.41,0.77,69.252
+"46","https://www.usnews.com/best-colleges/university-of-georgia-1598","University of Georgia",30.404,10.038,37606,"Public, Coed",1785,"City","1200",49.9,"More selective",0.54,0.43,0.63,40.442
+"47","https://www.usnews.com/best-colleges/university-of-illinois-urbanachampaign-1775","University of Illinois--Urbana-Champaign",32.568,11.308,48216,"Public, Coed",1867,"City","1800",59.9,"More selective",0.62,0.55,0.7,43.876
+"48","https://www.usnews.com/best-colleges/rpi-2803","Rensselaer Polytechnic Institute",53.88,15.26,7633,"Private, Coed",1824,"Suburban","674.3",68.4,"More selective",0.43,0.68,0.61,69.14
+"49","https://www.usnews.com/best-colleges/university-of-texas-3658","University of Texas--Austin",37.48,10.804,51525,"Public, Coed",1883,"Urban","3700",56.8,"More selective",0.36,0.47,0.58,48.284
+"50","https://www.usnews.com/best-colleges/university-of-wisconsin-3895","University of Wisconsin--Madison",36.805,11.114,43820,"Public, Coed",1848,"City","3800",53.7,"More selective",0.54,0.49,0.61,47.919
+"51","https://www.usnews.com/best-colleges/villanova-3388","Villanova University",53.458,14.02,10983,"Private, Coed",1842,"Suburban","641.3",61.2,"Most selective",0.36,0.47,0.87,67.478
+"52","https://www.usnews.com/best-colleges/lehigh-university-3289","Lehigh University",52.93,13.6,7017,"Private, Coed",1865,"City","1300",65.8,"Most selective",0.25,0.55,0.76,66.53
+"53","https://www.usnews.com/best-colleges/syracuse-university-2882","Syracuse University",51.853,15.55,22484,"Private, Coed",1870,"City","1300",53.6,"More selective",0.47,0.46,0.7,67.403
+"54","https://www.usnews.com/best-colleges/university-of-miami-1536","University of Miami",50.226,14.108,17003,"Private, Coed",1925,"Suburban","948.6",53.4,"More selective",0.36,0.48,0.72,64.334
+"55","https://www.usnews.com/best-colleges/ohio-state-6883","Ohio State University--Columbus",30.742,12.434,59837,"Public, Coed",1870,"Urban","4200",53.1,"More selective",0.48,0.52,0.59,43.176
+"56","https://www.usnews.com/best-colleges/purdue-university-west-lafayette-1825","Purdue University--West Lafayette",28.804,10.03,41573,"Public, Coed",1869,"City","2300",60,"More selective",0.57,0.57,0.51,38.834
+"57","https://www.usnews.com/best-colleges/rutgers-new-brunswick-6964","Rutgers University--New Brunswick",31.282,12.706,49577,"Public, Coed",1766,"City","985.5",55.6,"More selective",0.58,0.5,0.6,43.988
+"58","https://www.usnews.com/best-colleges/penn-state-6965","Pennsylvania State University--University Park",34.858,11.57,47119,"Public, Coed",1855,"City","2000",56.7,"More selective",0.5,0.53,0.67,46.428
+"59","https://www.usnews.com/best-colleges/smu-3613","Southern Methodist University",54.493,16.845,11789,"Private, Coed",1911,"Urban","1500",54.9,"More selective",0.49,0.5,0.71,71.338
+"60","https://www.usnews.com/best-colleges/university-of-washington-3798","University of Washington",36.898,12.798,46166,"Public, Coed",1861,"Urban","3200",56.9,"More selective",0.46,0.47,0.65,49.696
+"61","https://www.usnews.com/best-colleges/wpi-2233","Worcester Polytechnic Institute",50.53,14.774,6642,"Private, Coed",1865,"City","502.5",68.8,"More selective",0.48,0.64,0.82,65.304
+"62","https://www.usnews.com/best-colleges/george-washington-university-1444","George Washington University",55.23,13.85,27973,"Private, Coed",1821,"Urban","1700",53.3,"More selective",0.41,0.4,0.73,69.08
+"63","https://www.usnews.com/best-colleges/uconn-29013","University of Connecticut",38.098,12.874,27578,"Public, Coed",1881,"Rural","401.3",57.2,"More selective",0.48,0.5,0.7,50.972
+"64","https://www.usnews.com/best-colleges/university-of-maryland-2103","University of Maryland--College Park",35.216,12.429,40521,"Public, Coed",1856,"Suburban","548.7",58.2,"More selective",0.44,0.53,0.67,47.645
+"65","https://www.usnews.com/best-colleges/byu-3670","Brigham Young University--Provo",5.62,7.628,34334,"Private, Coed",1875,"City","1700",55.8,"More selective",0.52,0.51,0.23,13.248
+"66","https://www.usnews.com/best-colleges/clark-university-massachusetts-2139","Clark University",45.73,9.17,3153,"Private, Coed",1887,"City","408.8",46.1,"More selective",0.56,0.39,0.77,54.9
+"67","https://www.usnews.com/best-colleges/clemson-university-3425","Clemson University",36.724,10.832,24387,"Public, Coed",1889,"Suburban","682.7",55.4,"More selective",0.47,0.51,0.59,47.556
+"68","https://www.usnews.com/best-colleges/texas-am-university-college-station-10366","Texas A&M University--College Station",36.636,10.436,67580,"Public, Coed",1876,"City","10800",57.9,"More selective",0.7,0.52,0.54,47.072
+"69","https://www.usnews.com/best-colleges/florida-state-university-1489","Florida State University",21.673,10.458,41362,"Public, Coed",1851,"City","639.4",46.4,"More selective",0.49,0.44,0.63,32.131
+"70","https://www.usnews.com/best-colleges/fordham-university-2722","Fordham University",52.248,17.969,16037,"Private, Coed",1841,"Urban","691.1",53.1,"More selective",0.46,0.42,0.74,70.217
+"71","https://www.usnews.com/best-colleges/stevens-institute-of-technology-2639","Stevens Institute of Technology",52.202,15.244,6771,"Private, Coed",1870,"City","183.9",69,"Most selective",0.44,0.7,0.42,67.446
+"72","https://www.usnews.com/best-colleges/university-of-california-santa-cruz-1321","University of California--Santa Cruz",41.963,16.407,19457,"Public, Coed",1965,"Suburban","188.7",52,"More selective",0.51,0.5,0.55,58.37
+"73","https://www.usnews.com/best-colleges/umass-amherst-2221","University of Massachusetts--Amherst",34.57,13.202,30340,"Public, Coed",1863,"Suburban","323.6",53.9,"More selective",0.57,0.5,0.67,47.772
+"74","https://www.usnews.com/best-colleges/university-of-pittsburgh-3379","University of Pittsburgh",32.052,11.05,28642,"Public, Coed",1787,"Urban","3900",53.2,"More selective",0.6,0.49,0.65,43.102
+"75","https://www.usnews.com/best-colleges/university-of-minnesota-twin-cities-3969","University of Minnesota--Twin Cities",30.371,10.312,51848,"Public, Coed",1851,"Urban","3300",54.1,"More selective",0.5,0.47,0.64,40.683
+"76","https://www.usnews.com/best-colleges/virginia-tech-3754","Virginia Tech",31.304,8.408,34440,"Public, Coed",1872,"Rural","987.6",60,"More selective",0.7,0.57,0.63,39.712
+"77","https://www.usnews.com/best-colleges/american-university-1434","American University",48.459,14.88,13858,"Private, Coed",1893,"Suburban","622.0",48.5,"More selective",0.29,0.38,0.76,63.339
+"78","https://www.usnews.com/best-colleges/baylor-university-6967","Baylor University",45.542,7.8,17059,"Private, Coed",1845,"City","1200",51.3,"More selective",0.39,0.41,0.6,53.342
+"79","https://www.usnews.com/best-colleges/suny-binghamton-2836","Binghamton University--SUNY",24.488,15.058,17342,"Public, Coed",1946,"Suburban","109.3",55.4,"More selective",0.4,0.51,0.73,39.546
+"80","https://www.usnews.com/best-colleges/colorado-school-of-mines-1348","Colorado School of Mines",38.584,13.169,6117,"Public, Coed",1874,"Suburban","246.1",69.7,"More selective",0.56,0.71,0.55,51.753
+"81","https://www.usnews.com/best-colleges/north-carolina-state-raleigh-2972","North Carolina State University--Raleigh",28.444,11.078,34432,"Public, Coed",1887,"City","1100",55.4,"More selective",0.51,0.55,0.5,39.522
+"82","https://www.usnews.com/best-colleges/stony-brook-suny-2838","Stony Brook University--SUNY",26.934,13.698,25989,"Public, Coed",1957,"Suburban","234.0",54.4,"More selective",0.42,0.53,0.53,40.632
+"83","https://www.usnews.com/best-colleges/tcu-3636","Texas Christian University",46.95,12.804,10489,"Private, Coed",1873,"Suburban","1500",51.2,"More selective",0.41,0.41,0.69,59.754
+"84","https://www.usnews.com/best-colleges/yeshiva-university-2903","Yeshiva University",43.5,12.25,6311,"Private, Coed",1886,"Urban","506.2",53.4,"More selective",0.63,0.53,0.76,55.75
+"85","https://www.usnews.com/best-colleges/michigan-state-2290","Michigan State University",39.75,10.272,50019,"Public, Coed",1855,"Suburban","3100",52.2,"More selective",0.72,0.49,0.52,50.022
+"86","https://www.usnews.com/best-colleges/university-of-california-riverside-1316","University of California--Riverside",42.879,16,23278,"Public, Coed",1954,"City","231.1",50.7,"More selective",0.57,0.46,0.53,58.879
+"87","https://www.usnews.com/best-colleges/university-of-san-diego-10395","University of San Diego",49.358,12.98,8905,"Private, Coed",1949,"Urban","503.6",54,"More selective",0.5,0.46,0.7,62.338
+"88","https://www.usnews.com/best-colleges/howard-university-1448","Howard University",26.756,13.895,9392,"Private, Coed",1867,"Urban","646.6",51.5,"Selective",0.41,0.31,0.43,40.651
+"89","https://www.usnews.com/best-colleges/indiana-university-bloomington-1809","Indiana University--Bloomington",35.456,10.465,43710,"Public, Coed",1820,"City","1100",49.7,"More selective",0.76,0.51,0.63,45.921
+"90","https://www.usnews.com/best-colleges/loyola-university-chicago-1710","Loyola University Chicago",44.048,14.48,16673,"Private, Coed",1870,"City","593.5",49.1,"More selective",0.71,0.34,0.69,58.528
+"91","https://www.usnews.com/best-colleges/marquette-university-3863","Marquette University",41.87,12.72,11426,"Private, Coed",1881,"Urban","626.2",54,"More selective",0.89,0.47,0.59,54.59
+"92","https://www.usnews.com/best-colleges/ub-9554","University at Buffalo--SUNY",27.758,13.723,30648,"Public, Coed",1846,"Suburban","659.2",51.1,"More selective",0.57,0.57,0.57,41.481
+"93","https://www.usnews.com/best-colleges/university-of-delaware-1431","University of Delaware",34.31,12.864,22970,"Public, Coed",1743,"Suburban","1400",54.8,"More selective",0.6,0.43,0.73,47.174
+"94","https://www.usnews.com/best-colleges/university-of-iowa-1892","University of Iowa",30.609,10.45,32166,"Public, Coed",1847,"City","1400",49.6,"More selective",0.86,0.47,0.54,41.059
+"95","https://www.usnews.com/best-colleges/illinois-institute-of-technology-1691","Illinois Institute of Technology",47.646,13.192,7164,"Private, Coed",1890,"Urban","241.9",61.4,"More selective",0.54,0.69,0.32,60.838
+"96","https://www.usnews.com/best-colleges/miami-university-7104","Miami University--Oxford",33.577,13.031,19700,"Public, Coed",1809,"Rural","512.4",53.3,"More selective",0.68,0.5,0.67,46.608
+"97","https://www.usnews.com/best-colleges/university-of-colorado-boulder-1370","University of Colorado--Boulder",37.288,14.418,35230,"Public, Coed",1876,"City","596.4",53.4,"More selective",0.8,0.56,0.45,51.706
+"98","https://www.usnews.com/best-colleges/university-of-denver-1371","University of Denver",50.556,13.005,11434,"Private, Coed",1864,"City","711.3",50.6,"More selective",0.58,0.47,0.65,63.561
+"99","https://www.usnews.com/best-colleges/university-of-san-francisco-1325","University of San Francisco",48.066,14.83,11080,"Private, Coed",1855,"Urban","349.6",54.9,"More selective",0.66,0.38,0.67,62.896
+"100","https://www.usnews.com/best-colleges/university-of-vermont-3696","University of Vermont",42.516,12.462,13340,"Public, Coed",1791,"Suburban","453.3",49.3,"More selective",0.67,0.42,0.62,54.978
+"101","https://www.usnews.com/best-colleges/clarkson-university-2699","Clarkson University",49.444,15.222,4233,"Private, Coed",1896,"Rural","191.1",63.8,"More selective",0.66,0.7,0.58,64.666
+"102","https://www.usnews.com/best-colleges/drexel-university-3256","Drexel University",52.002,13.89,21940,"Private, Coed",1891,"Urban","707.6",59.9,"More selective",0.79,0.5,0,65.892
+"103","https://www.usnews.com/best-colleges/rit-2806","Rochester Institute of Technology",44.13,13.046,15346,"Private, Coed",1829,"Suburban","847.2",60.3,"More selective",0.57,0.67,0.28,57.176
+"104","https://www.usnews.com/best-colleges/university-of-oregon-3223","University of Oregon",35.478,12.963,22887,"Public, Coed",1876,"City","828.5",48.3,"Selective",0.83,0.46,0.52,48.441
+"105","https://www.usnews.com/best-colleges/njit-2621","New Jersey Institute of Technology",31.918,13.808,11446,"Public, Coed",1881,"Urban","112.4",60.9,"More selective",0.61,0.74,0.28,45.726
+"106","https://www.usnews.com/best-colleges/st-louis-university-2506","Saint Louis University",43.996,12.29,12098,"Private, Coed",1818,"Urban","1100",50.6,"More selective",0.64,0.4,0.66,56.286
+"107","https://www.usnews.com/best-colleges/suny-environmental-science-and-forestry-2851","SUNY College of Environmental Science and Forestry",18.218,16.14,2215,"Public, Coed",1911,"City","35.9",52.2,"More selective",0.52,0.53,0,34.358
+"108","https://www.usnews.com/best-colleges/temple-university-3371","Temple University",28.426,11.566,39948,"Public, Coed",1884,"Urban","615.4",48.3,"More selective",0.57,0.47,0.45,39.992
+"109","https://www.usnews.com/best-colleges/university-of-arizona-1083","University of Arizona",NA,NA,44831,"Public, Coed",1885,"City","843.5",53.3,"More selective",0.84,0.48,0.45,NA

@@ -10,7 +10,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(stringr)
 ```
 
-## R Markdown
+## Part 1: Data Scraping
 
 ```{r message=FALSE, warning=FALSE}
 library(rvest)
@@ -118,7 +118,6 @@ formatted_college_tab <- college_tab
 formatted_college_tab$SchoolType <- as.factor(formatted_college_tab$SchoolType)
 formatted_college_tab$Setting <- as.factor(formatted_college_tab$Setting)
 formatted_college_tab$YearFounded <- as.integer(formatted_college_tab$YearFounded)
-
 #fix Endowment2017 formatting
 formatted_college_tab$Endowment2017Millions  <- ifelse(grepl("billion", formatted_college_tab$Endowment2017Millions ), sub("\\.","",formatted_college_tab$Endowment2017Millions ),formatted_college_tab$Endowment2017Millions )
 formatted_college_tab$Endowment2017Millions  <-sub(" billion","00",formatted_college_tab$Endowment2017Millions )
@@ -126,6 +125,7 @@ formatted_college_tab$Endowment2017Millions  <-sub(" million","",formatted_colle
 formatted_college_tab$Endowment2017Millions  <-sub("[[:punct:]]", "",formatted_college_tab$Endowment2017Millions )
 formatted_college_tab$Endowment2017Millions  <-sub("\\$", "",formatted_college_tab$Endowment2017Millions )
 formatted_college_tab$Endowment2017Millions  <-sub(" \\+", "",formatted_college_tab$Endowment2017Millions )
+formatted_college_tab$Endowment2017Millions <- as.double(formatted_college_tab$Endowment2017Millions)
 #fix College Name formatting
 formatted_college_tab$CollegeName <- sub("^\n        ","",formatted_college_tab$CollegeName)
 formatted_college_tab$CollegeName <-sub("\n    ","",formatted_college_tab$CollegeName)
@@ -169,6 +169,8 @@ formatted_college_tab$TotalEnrollment <- as.double(formatted_college_tab$TotalEn
 
 formatted_college_tab <- formatted_college_tab %>% mutate(TotalCostThousands =TuitionFeesThousands + RoomBoardThousands )
 
+formatted_college_tab <- na.omit(formatted_college_tab)
+nrow(formatted_college_tab)
 head(formatted_college_tab)
 ```
 
@@ -176,13 +178,14 @@ head(formatted_college_tab)
 ``{r}
 to save as csv to easily work on it without having to reload
 write.csv(formatted_college_tab, file = "college_info.csv")
-```
+``
 ``{r}
-college_info <- read.csv("college_info.csv")
+formatted_college_tab <- read.csv("college_info.csv")
+formatted_college_tab <- formatted_college_tab[,-c(1)]
+formatted_college_tab
 ```
 
-
-#r EDAvisualization
+## Part 2: Data Visualization
 ```{r fig1, fig.height = 10, fig.width = 12}
 #Starting Salary
 #-histograms
@@ -278,4 +281,59 @@ Between school types, private colleges seem to have greater starting salaries th
 ```
 
 
+## Part 3: Model Fitting and Selection
+
+### Fitting model for tuition prices
+
+```{r}
+#adjusting dataset to remove variables not able to be used in model fitting
+college_info <- formatted_college_tab[,-c(1,2)]
+head(college_info)
+```
+
+```{r}
+college_info$FourYearGraduationRate <- college_info$FourYearGraduationRate*100
+college_info$MalePercentage <- college_info$MalePercentage*100
+college_info$Fall2017AcceptanceRate <- college_info$Fall2017AcceptanceRate*100
+```
+
+```{r}
+#linear model fitting 
+tuition_lm_1 <- lm(TuitionFeesThousands~.-RoomBoardThousands-TotalCostThousands, data = college_info)
+summary(tuition_lm_1)
+```
+
+```{r}
+plot(tuition_lm_1)
+```
+
+```{r}
+tuition_lm_2 <- step(tuition_lm_1, direction = "both", steps = 1000, trace = F)
+summary(tuition_lm_2)
+```
+
+```{r}
+plot(tuition_lm_2)
+```
+```{r}
+anova(tuition_lm_2,tuition_lm_1, test="Chisq")
+```
+
+### Fitting model for graduation rate
+```{r}
+#linear model fitting 
+gradrate_lm_1 <- lm(MedianStartingSalaryOfAlumniThousands~.-TuitionFeesThousands-RoomBoardThousands, data = na.omit(college_info))
+summary(gradrate_lm_1)
+plot(gradrate_lm_1)
+```
+```{r}
+gradrate_lm_2 <- step(gradrate_lm_1, direction = "both", steps = 1000, trace = F)
+summary(gradrate_lm_2)
+
+```
+```{r}
+plot(gradrate_lm_2)
+
+anova(gradrate_lm_2,gradrate_lm_1, test="Chisq")
+```
 
