@@ -1,17 +1,16 @@
 ---
-  title: "320 Final Project"
+title: "320 Final Project"
 author: "Amy, Katie, Shawdi"
 date: "5/11/2019"
 output: html_document
 ---
   
-  ```{r setup, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(stringr)
 ```
 
 ## R Markdown
-
 
 ```{r message=FALSE, warning=FALSE}
 library(rvest)
@@ -22,7 +21,7 @@ college_urls <- url %>%
   html_node("body") %>% html_nodes("ol[class~=bEyEue]") %>% html_nodes("li[id]")%>% html_nodes("h3") %>% 
   html_nodes("a[href]") %>%
   html_attr("href") 
-college_urls
+head(college_urls)
 
 ```
 
@@ -33,15 +32,14 @@ index_num <- 0
 college_tab_1 <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com",college_urls, sep = "")), 
 "CollegeName"= "", "TuitionFeesThousands" = 0, "RoomBoardThousands" = 0, "TotalEnrollment" = 0, "SchoolType" = "", "YearFounded" = 0, "Setting" = "", "Endowment2017Millions" = 0, "MedianStartingSalaryOfAlumniThousands" = 0, "Selectivity" = "", "Fall2017AcceptanceRate" = 0, "MalePercentage" = 0, "FourYearGraduationRate" = 0, stringsAsFactors = FALSE) 
 
+#removing one college that doesn't have a median starting salary, for data uniformity
 college_tab_1 <- college_tab_1[-c(40),]
 
-college_tab_1
+head(college_tab_1)
 ```
 
-
+Below are functions used to obtain data from the website and parse it.
 ```{r message=FALSE, warning=FALSE}
-#Shawdi start here
-
 #retrieves of vector of size three containing the Tuition&Fees, Room&Board, and total enrollment
 get_info <- function(url_html){
   attr <- url_html %>% html_node("body") %>% html_nodes("div[id~=content-main]") %>%   
@@ -82,21 +80,21 @@ get_gender_ratio <- function(url_html){
   }else{
     get_percent(url_html)
   }
-  
 }
-
 ```
 
-
+Here, we use both the functions above and the html_node function to fill out the table. 
 ```{r, message=FALSE, warning = FALSE}
 college_tab <- college_tab_1
 
 for (i in 1:nrow(college_tab)){
   url_html <- college_tab[i,1] %>%read_html()
   college_tab[i,]$CollegeName <- url_html %>% html_node("body") %>% html_nodes("h1[class~=hero-heading]") %>% html_text()
-  college_tab[i,]$TuitionFeesThousands <- get_tuition_rm(get_info(url_html), 1)
-  college_tab[i,]$RoomBoardThousands <- get_tuition_rm(get_info(url_html), 2)
-  college_tab[i,]$TotalEnrollment <- get_enrollment(get_info(url_html))
+  priv_tuition <- url_html %>% html_node("body") %>% html_nodes("span[data-test-id~=v_private_tuition]") %>% html_text()
+  college_tab[i,]$TuitionFeesThousands <- ifelse(length(priv_tuition) > 0, priv_tuition, 
+                                                 url_html %>% html_node("body") %>% html_node("span[data-test-id~=v_out_state_tuition]") %>% html_text())
+  college_tab[i,]$RoomBoardThousands <- url_html %>% html_node("body") %>% html_node("span[data-test-id~=w_room_board]") %>% html_text()
+  college_tab[i,]$TotalEnrollment <- url_html %>% html_node("body") %>% html_node("span[data-test-id~=total_all_students]") %>% html_text()
   college_tab[i,]$MalePercentage <- get_gender_ratio(url_html)
   college_tab[i,]$Fall2017AcceptanceRate <- url_html %>% html_node("span[data-test-id~=r_c_accept_rate]") %>% html_text()
   college_tab[i,]$Selectivity <- url_html %>% html_node("span[data-test-id~=c_select_class]") %>% html_text()
@@ -109,24 +107,24 @@ for (i in 1:nrow(college_tab)){
   college_tab[i,]$Endowment2017Millions  <- temp_vector[6]
 }
 
-college_tab
+head(college_tab)
 ```
 
 
+Below, we reformat many of the columns to get usable data.
 ```{r formatting}
 formatted_college_tab <- college_tab
 #fix type of School Type, Setting, Year Founded
 formatted_college_tab$SchoolType <- as.factor(formatted_college_tab$SchoolType)
 formatted_college_tab$Setting <- as.factor(formatted_college_tab$Setting)
 formatted_college_tab$YearFounded <- as.integer(formatted_college_tab$YearFounded)
+
 #fix Endowment2017 formatting
 formatted_college_tab$Endowment2017Millions  <- ifelse(grepl("billion", formatted_college_tab$Endowment2017Millions ), sub("\\.","",formatted_college_tab$Endowment2017Millions ),formatted_college_tab$Endowment2017Millions )
 formatted_college_tab$Endowment2017Millions  <-sub(" billion","00",formatted_college_tab$Endowment2017Millions )
 formatted_college_tab$Endowment2017Millions  <-sub(" million","",formatted_college_tab$Endowment2017Millions )
-
 formatted_college_tab$Endowment2017Millions  <-sub("[[:punct:]]", "",formatted_college_tab$Endowment2017Millions )
 formatted_college_tab$Endowment2017Millions  <-sub("\\$", "",formatted_college_tab$Endowment2017Millions )
-
 formatted_college_tab$Endowment2017Millions  <-sub(" \\+", "",formatted_college_tab$Endowment2017Millions )
 #fix College Name formatting
 formatted_college_tab$CollegeName <- sub("^\n        ","",formatted_college_tab$CollegeName)
@@ -151,28 +149,37 @@ formatted_college_tab$MedianStartingSalaryOfAlumniThousands <- as.double(formatt
 #fixing Selectivity formatting
 formatted_college_tab$Selectivity <- sub("\n            ","",formatted_college_tab$Selectivity)
 formatted_college_tab$Selectivity <- as.factor(formatted_college_tab$Selectivity)
+#fixing Tuition formatting
+formatted_college_tab$TuitionFeesThousands <- sub("\n            ", "",formatted_college_tab$TuitionFeesThousands )
+formatted_college_tab$TuitionFeesThousands <- sub(" \\(2018-19\\)", "",formatted_college_tab$TuitionFeesThousands )
+formatted_college_tab$TuitionFeesThousands  <-sub("\\,", "",formatted_college_tab$TuitionFeesThousands )
+formatted_college_tab$TuitionFeesThousands  <-sub("\\$", "",formatted_college_tab$TuitionFeesThousands )
+formatted_college_tab$TuitionFeesThousands <- as.double(formatted_college_tab$TuitionFeesThousands)/1000
+#fixing RoomBoard formatting
+formatted_college_tab$RoomBoardThousands <- sub("\n            ", "",formatted_college_tab$RoomBoardThousands )
+formatted_college_tab$RoomBoardThousands <- sub(" \\(2018-19\\)", "",formatted_college_tab$RoomBoardThousands )
+formatted_college_tab$RoomBoardThousands  <-sub("\\,", "",formatted_college_tab$RoomBoardThousands )
+formatted_college_tab$RoomBoardThousands  <-sub("\\$", "",formatted_college_tab$RoomBoardThousands )
+formatted_college_tab$RoomBoardThousands <- as.double(formatted_college_tab$RoomBoardThousands)/1000
+#fixing Enrollment formatting
+formatted_college_tab$TotalEnrollment <- sub("\n            ", "",formatted_college_tab$TotalEnrollment )
+formatted_college_tab$TotalEnrollment  <-sub("\\,", "",formatted_college_tab$TotalEnrollment )
+formatted_college_tab$TotalEnrollment <- as.double(formatted_college_tab$TotalEnrollment)
+
 
 formatted_college_tab <- formatted_college_tab %>% mutate(TotalCostThousands =TuitionFeesThousands + RoomBoardThousands )
 
-formatted_college_tab
-```
-
-```{r}
-formatted_college_tab$Endowment2017Millions  <- ifelse(grepl("billion", formatted_college_tab$Endowment2017Millions ), sub("\\.","",college_tab$Endowment2017Millions ),formatted_college_tab$Endowment2017Millions )
-formatted_college_tab$Endowment2017Millions  <-sub(" billion","00",formatted_college_tab$Endowment2017Millions )
-formatted_college_tab$Endowment2017Millions  <-sub(" million","",formatted_college_tab$Endowment2017Millions )
-
-formatted_college_tab$Endowment2017Millions  <-sub("[[:punct:]]", "",formatted_college_tab$Endowment2017Millions )
-formatted_college_tab$Endowment2017Millions  <-sub("\\$", "",formatted_college_tab$Endowment2017Millions )
-
-formatted_college_tab$Endowment2017Millions  <-sub(" \\+", "",formatted_college_tab$Endowment2017Millions )
-formatted_college_tab$Endowment2017Millions
+head(formatted_college_tab)
 ```
 
 
-
-
-
+``{r}
+to save as csv to easily work on it without having to reload
+write.csv(formatted_college_tab, file = "college_info.csv")
+```
+``{r}
+college_info <- read.csv("college_info.csv")
+```
 
 
 #r EDAvisualization
@@ -189,8 +196,6 @@ plot_1
 ```
 
 The distribution of the median starting salary of alumni from all the school seems to be a bell-shaped curve, centering around $55,000.
-
-
 
 ```{r fig2, fig.height = 10, fig.width = 12}
 
@@ -249,7 +254,7 @@ The boxplots of room & board costs based on setting shows that the setting of th
 
 ```{r fig6, fig.height = 10, fig.width = 12}
 plot_6 <- formatted_college_tab %>%
-  ggplot(aes(x=TotalCostThousand, y=MedianStartingSalaryOfAlumniThousands)) +
+  ggplot(aes(x=TotalCostThousands, y=MedianStartingSalaryOfAlumniThousands)) +
     geom_point()+ 
     geom_smooth(method=lm)+
         labs(title="Total Cost vs. Median Starting Salary", x="Total Cost (Thousand)", y="Median Starting Salary Of Alumni (Thousands)")
