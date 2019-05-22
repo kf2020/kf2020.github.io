@@ -1,7 +1,7 @@
 ---
 title: "320 Final Project"
-author: "Amy, Katheryn Fox, Shawdi"
-date: "5/21/2019"
+author: "Amy Vuong, Katheryn Fox, Shawdi Hootkany"
+date: "5/22/2019"
 output: html_document
 margin: 1in
 
