@@ -60,7 +60,7 @@ You will use R and the following libraries:
 
 #Part 1: Data Acquisition
 
-###1.a: Scraping
+###Part 1A: Scraping
 
 The main url we will be using contains very limited information about each of the schools, such as ranking and tuition, therefore the first step that needs to be taken to be able to gain all the information we need to be able to analyze the data and make predictions is to parse the information into readable data. Detailed information about each school is spread across multiple websites so we will need to retrieve the proper url for each university from the US News website containing the ranking and then parse important information into tables that could be used for data analysis.
 
@@ -166,7 +166,7 @@ for (i in 1:nrow(college_tab)){
 head(college_tab)
 ```
 
-###1.b Data Cleaning & Tidying
+###Part 1B: Data Cleaning & Tidying
 
 Below, we reformat many of the columns to get usable data. Each column is categorized into the appropriate type of data. 
 
@@ -238,7 +238,7 @@ as.tibble(formatted_college_tab)
 #Part 2: Data Visualization
 We plot the data in order to visualize relationships among the attributes. 
 
-### Starting Salary Distribution
+###Part 2A: Starting Salary Distribution
 ```{r fig1, fig.height = 10, fig.width = 12}
 #Starting Salary
 #-histograms
@@ -253,7 +253,7 @@ plot_1
 
 The distribution of the median starting salary of alumni from all the school seems to be a bell-shaped curve (a little skewed right), centering around $55,000.
 
-### Tuition Cost Distrubition
+###Part 2B: Tuition Cost Distrubition
 ```{r fig2, fig.height = 10, fig.width = 12}
 
 #Tuition Cost
@@ -273,7 +273,7 @@ The distribution of tution costs of all the schools is skewed left, with a range
 
 #Part 3: Model Fitting and Selection
 
-###3.a: Data Preparation
+###Part 3A: Data Preparation
 Begin by removing the two columns with identifying information, as these are not useful in fitting models.
 ```{r}
 #adjusting dataset to remove variables not able to be used in model fitting
@@ -288,7 +288,7 @@ college_info$MalePercentage <- college_info$MalePercentage*100
 college_info$Fall2017AcceptanceRate <- college_info$Fall2017AcceptanceRate*100
 ```
 
-##Fitting model for tuition prices
+##Part 3B:Fitting model for tuition prices
 First, fit the model using the [lm function](https://www.rdocumentation.org/packages/stats/versions/3.6.0/topics/lm). From R documentation: "A typical model has the form response ~ terms where response is the (numeric) response vector and terms is a series of terms which specifies a linear predictor for response." Here, we set the response variable to be tuition costs and the terms to be all variables except room and board costs and total costs, as they are extremely highly correlated (as tuition is also a part of total cost).
 ```{r}
 tuition_lm_1 <- lm(TuitionFeesThousands~.-RoomBoardThousands-TotalCostThousands, data = college_info)
@@ -320,7 +320,7 @@ Because the P-value is quite high for the second model, we will choose to use th
 
 
 
-##Fitting model for Median Starting Salary
+##Part 3C: Fitting model for Median Starting Salary
 Using much of the same procedure, we decided to investigate Median Starting Salaries. 
 ```{r}
 startingsalary_lm_1 <- lm(MedianStartingSalaryOfAlumniThousands~.-TuitionFeesThousands-RoomBoardThousands, data = na.omit(college_info))
