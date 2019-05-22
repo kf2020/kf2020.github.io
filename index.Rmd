@@ -11,24 +11,51 @@ margin: 1in
 knitr::opts_chunk$set(echo = TRUE)
 library(stringr)
 ```
-#Introduction: 
-Going to and succeeding in college involves a lot of different factors, from enrollment size to the cost of tuition. We will explore how these factors are related to other factors, such as graduation rate and the starting salary of gradutes. 
+#Introduction
+In the US, attending college is a true financial investment. Students take out hundreds of thousands of dollars in student loans, to attend school and earn their degree. According to [studentloanhero.com](https://studentloanhero.com/student-loan-debt-statistics/), 69% of the graduating class of 2018 left school with student loans, with an average debt of \$29,800. Altogether, American citizens "owe over \$1.56 trillion in student loan debt, spread out among about 45 million borrowers" ([studentloanhero.com](https://studentloanhero.com/student-loan-debt-statistics/)).
 
-The following dataset contains information about an array of US Universities based on National Ranking. The most important piece of information this dataset provides is the ranking of each university. There are often many assumptions made based on the ranking of a school, such as average starting salary, average tuition, and graduation rate. By having information such as tuition rate, enrollments, location, and median starting salary of alumni, we will be able to test whether there is an actual correlation between ranking and these assumptions. We will also be able to come up with our own predictions and test whether we will be able to predict information such as starting salary based on the provided information about each undergraduate institution. A couple other questions we would like to answer are as follows:
-What is the most important factor when predicting starting salary for undergraduate institutions?
-Is the cost of undergraduate tuition a key factor?
-Does undergraduate salary correlated with the male to female ratio at the institution in any kind of way?
-Which variables can be used to predict the cost of tuition?
-Which predictors are influential in this?
-Can we predict graduation rate?
+This crisis centers around money: paying for college as well as the ability to pay off student debt after graduation.
 
-##Required Tools
+To better understand the statistics and relationships between factors of these costs and salaries, we found a dataset that could provide financial information about students and costs as well as extensive information about the schools themselves. This provides greater insight into the possible driving factors behind published statistics like median starting salary and school tuition prices.
+
+###The Dataset
+
+Utilizing the publicly available and widely trusted source, [U.S. News 2019 Best National Univeristy](https://www.usnews.com/best-colleges/rankings/national-universities) ranking list, we were able to access information about top schools that was organized in a digestable and scrapable manner.
+
+We obtained information regarding 12 different variables (using the URL and School Name to uniquely identify the Univerisities):
+
+* Tuition Cost (in USD - out of state tuition used if university is a state school)
+* Room & Board (in USD)
+* Total Enrollment
+* School Type (Private/Public)
+* Year Founded
+* Setting
+* Endowment 2017
+* Median Starting Salary Of Alumni (3 years postgraduate)
+* Selectivity
+* Fall 2017 Acceptance Rate
+* Male Percentage
+* Four Year Graduation Rate
+
+We chose to use the top 110, removing one row, because of data inconsistency, as it did not provide a Median Starting Salary for Alumni. This was the Univerity of California - Santa Barbara.
+
+###Research Questions
+
+* What variables are statistically significant in predicting college tuition prices?
+    + Which factors seem to drive the biggest increases?
+    + Does a higher endowment mean that students have to spend less on tuition? (i.e. does it appear that schools use their endowments to supplement tuition prices at all?)
+* What variables are statistically significant in predicting median starting salary for alumni (with 3 years of experience post-grad)?
+    + Is the cost of undergraduate tuition a key factor? (i.e. spending more on education correlated with getting more money later?)
+    + Is median starting salary correlated with the male to female ratio at the institution in any kind of way?
+
+###Required Tools
 
 You will use R and the following libraries: 
--ggplot2
--rvest
--tidyverse
--stringr
+
+* ggplot2
+* rvest
+* tidyverse
+* stringr
 
 ***
 
@@ -56,7 +83,7 @@ head(college_urls)
 
 ```
 
-A data frame is created to store the information of each college in rows. Columns are initialized. 
+A data frame is created to store the information of each college in rows. Columns are initialized with their corresponding default values.
 
 ```{r message=FALSE, warning=FALSE}
 index_num <- 0
@@ -66,8 +93,6 @@ college_tab_1 <-  data.frame("URL" = gsub(" ", "", paste("https://www.usnews.com
 
 #removing one college that doesn't have a median starting salary, for data uniformity
 college_tab_1 <- college_tab_1[-c(40),]
-
-head(college_tab_1)
 ```
 
 Below are functions used to obtain data from the website and parse it.
@@ -356,6 +381,7 @@ summary(tuition_lm_1)
 ```
 
 ```{r}
+par(mfrow=c(2,2))
 plot(tuition_lm_1)
 ```
 
