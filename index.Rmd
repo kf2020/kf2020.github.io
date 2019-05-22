@@ -2,7 +2,7 @@
 title: "320 Final Project"
 author: "Amy Vuong, Katheryn Fox, Shawdi Hootkany"
 date: "5/22/2019"
-output: word_document
+output: html_document
 margin: 1in
 ---
   
@@ -36,7 +36,7 @@ We obtained information regarding 12 different variables (using the URL and Scho
 * Male Percentage
 * Four Year Graduation Rate
 
-We chose to use the top 110, removing one row, because of data inconsistency, as it did not provide a Median Starting Salary for Alumni. This was the Univerity of California - Santa Barbara.
+We chose to use the top 110, removing one row, because of data inconsistency, as it did not provide a Median Starting Salary for Alumni. This was the University of California--Davis.
 
 ###Research Questions
 
@@ -58,16 +58,14 @@ You will use R and the following libraries:
 
 ***
 
-#Part 1: Data Scraping
+#Part 1: Data Acquisition
+
+###1.a: Scraping
 
 The main url we will be using contains very limited information about each of the schools, such as ranking and tuition, therefore the first step that needs to be taken to be able to gain all the information we need to be able to analyze the data and make predictions is to parse the information into readable data. Detailed information about each school is spread across multiple websites so we will need to retrieve the proper url for each university from the US News website containing the ranking and then parse important information into tables that could be used for data analysis.
 
-We are scraping the data of 100 schools from https://www.usnews.com/best-colleges/rankings/national-universities.
+We are scraping the data of 110 schools from https://www.usnews.com/best-colleges/rankings/national-universities.
 The data we have is stored in a text file since it loads on the page in increments. We parse the data to find the URL for each college's informational page. 
-
-Note: The information for the University of California--Davis was removed from the dataset because it didn’t contain median alumni salary, which plays a large role in our analysis. 
-
-Note: Room and Board, Tuition and Fees, and Median Alumni Salary are all in thousands of dollars.
 
 ```{r message=FALSE, warning=FALSE}
 library(rvest)
@@ -168,8 +166,11 @@ for (i in 1:nrow(college_tab)){
 head(college_tab)
 ```
 
+###1.b Data Cleaning & Tidying
 
 Below, we reformat many of the columns to get usable data. Each column is categorized into the appropriate type of data. 
+
+Note: We transform Room and Board, Tuition and Fees, and Median Alumni Salary so they are all in thousands of dollars. We transform Endowment so that it is in millions of dollars.
 
 ```{r formatting}
 formatted_college_tab <- college_tab
@@ -225,22 +226,10 @@ formatted_college_tab$TotalEnrollment <- sub("\n            ", "",formatted_coll
 formatted_college_tab$TotalEnrollment  <-sub("\\,", "",formatted_college_tab$TotalEnrollment )
 formatted_college_tab$TotalEnrollment <- as.double(formatted_college_tab$TotalEnrollment)
 
-
+#adding another column with total cost
 formatted_college_tab <- formatted_college_tab %>% mutate(TotalCostThousands =TuitionFeesThousands + RoomBoardThousands )
 
 formatted_college_tab <- na.omit(formatted_college_tab)
-nrow(formatted_college_tab)
-as.tibble(formatted_college_tab)
-```
-
-
-```{r}
-#to save as csv to easily work on it without having to reload
-write.csv(formatted_college_tab, file = "college_info.csv")
-```
-```{r}
-formatted_college_tab <- read.csv("college_info.csv")
-formatted_college_tab <- formatted_college_tab[,-c(1)]
 as.tibble(formatted_college_tab)
 ```
 
@@ -248,6 +237,8 @@ as.tibble(formatted_college_tab)
 
 #Part 2: Data Visualization
 We plot the data in order to visualize relationships among the attributes. 
+
+### Starting Salary Distribution
 ```{r fig1, fig.height = 10, fig.width = 12}
 #Starting Salary
 #-histograms
@@ -262,6 +253,7 @@ plot_1
 
 The distribution of the median starting salary of alumni from all the school seems to be a bell-shaped curve (a little skewed right), centering around $55,000.
 
+### Tuition Cost Distrubition
 ```{r fig2, fig.height = 10, fig.width = 12}
 
 #Tuition Cost
@@ -292,7 +284,7 @@ There is a linear relationship between acceptance rate (Fall 2017) and the four 
 
 
 ```{r fig4, fig.height = 10, fig.width = 12}
-#Boxplots of (1) gradruattion rate & (2) admission rate by selectivity 
+#Boxplots of (1) gradruation rate & (2) admission rate by selectivity 
 library(ggplot2)
 formatted_college_tab$Selectivity <- factor(formatted_college_tab$Selectivity, c("Selective","More selective","Most selective"))
 plot_4 <-  formatted_college_tab %>%
@@ -359,62 +351,87 @@ Although the points are scattered with some variation, there is a general positi
 
 #Part 3: Model Fitting and Selection
 
-##Fitting model for tuition prices
-
+###3.a: Data Preparation
+Begin by removing the two columns with identifying information, as these are not useful in fitting models.
 ```{r}
 #adjusting dataset to remove variables not able to be used in model fitting
 college_info <- formatted_college_tab[,-c(1,2)]
 head(college_info)
 ```
 
+To get a clearer picture of how a percentage increase affects the tuition cost, it's important to put these values back into whole numbers rather than proportions - this will make interpretation clearer.
 ```{r}
 college_info$FourYearGraduationRate <- college_info$FourYearGraduationRate*100
 college_info$MalePercentage <- college_info$MalePercentage*100
 college_info$Fall2017AcceptanceRate <- college_info$Fall2017AcceptanceRate*100
 ```
 
+##Fitting model for tuition prices
+First, fit the model using the [lm function](https://www.rdocumentation.org/packages/stats/versions/3.6.0/topics/lm). From R documentation: "A typical model has the form response ~ terms where response is the (numeric) response vector and terms is a series of terms which specifies a linear predictor for response." Here, we set the response variable to be tuition costs and the terms to be all variables except room and board costs and total costs, as they are extremely highly correlated (as tuition is also a part of total cost).
 ```{r}
-#linear model fitting 
 tuition_lm_1 <- lm(TuitionFeesThousands~.-RoomBoardThousands-TotalCostThousands, data = college_info)
 summary(tuition_lm_1)
 ```
 
-```{r}
+```{r, out.height='110%', out.width='150%'}
 par(mfrow=c(2,2))
 plot(tuition_lm_1)
 ```
+Looking at both the summary statistics, and summary plots, stepwise selection (using the [step function](https://www.rdocumentation.org/packages/stats/versions/3.6.0/topics/step)) will be useful in obtaining a better model.
 
+The stepwise algorithm removes variables and adds them back in (depending on the direction requested), looking to increase the AIC in order to fit a better model overall. To learn more about interpretting AIC, check out [this website](https://www.r-bloggers.com/how-do-i-interpret-the-aic/).
 ```{r}
 tuition_lm_2 <- step(tuition_lm_1, direction = "both", steps = 1000, trace = F)
 summary(tuition_lm_2)
 ```
-
-```{r}
+```{r, out.height='110%', out.width='150%'}
+par(mfrow=c(2,2))
 plot(tuition_lm_2)
 ```
+Looking at the summary statistics, we can see that the model is now reduced and only has SchoolType, Selectivity, and 4-year graduation rate as remaining predictors that are considered to be significantly significant in predicting the response variable.
+
+To compare the full and reduced models, we can perform a Chi-squared Anova test.
 ```{r}
-anova(tuition_lm_2,tuition_lm_1, test="Chisq")
+anova(tuition_lm_1,tuition_lm_2)
 ```
+Because the P-value is quite high for the second model, we will choose to use the first model, as there does not appear to be a significant improvement in the second model.
 
-##Fitting model for graduation rate
+
+
+##Fitting model for Median Starting Salary
+Using much of the same procedure, we decided to investigate Median Starting Salaries. 
 ```{r}
-#linear model fitting 
-gradrate_lm_1 <- lm(MedianStartingSalaryOfAlumniThousands~.-TuitionFeesThousands-RoomBoardThousands, data = na.omit(college_info))
-summary(gradrate_lm_1)
-plot(gradrate_lm_1)
+startingsalary_lm_1 <- lm(MedianStartingSalaryOfAlumniThousands~.-TuitionFeesThousands-RoomBoardThousands, data = na.omit(college_info))
+summary(startingsalary_lm_1)
+```
+```{r, out.height='110%', out.width='150%'}
+par(mfrow=c(2,2))
+plot(startingsalary_lm_1)
 ```
 ```{r}
-gradrate_lm_2 <- step(gradrate_lm_1, direction = "both", steps = 1000, trace = F)
-summary(gradrate_lm_2)
+startingsalary_lm_2 <- step(startingsalary_lm_1, direction = "both", steps = 1000, trace = F)
+summary(startingsalary_lm_2)
 
+```
+```{r, out.height='110%', out.width='150%'}
+par(mfrow=c(2,2))
+plot(startingsalary_lm_2)
 ```
 ```{r}
-plot(gradrate_lm_2)
-
-anova(gradrate_lm_2,gradrate_lm_1, test="Chisq")
+anova(startingsalary_lm_1,startingsalary_lm_2)
 ```
+Again, because the p-value is very high for the second model, we will choose to use the first model, as there does not appear to be a significant improvement in the second model.
 
-
+Noticing there was a pattern in the qq-plot, we decided to try a logistic transformation on the response variable to see if that would improve the adjusted r-squared value. 
+```{r}
+startingsalary_lm_3 <- lm(log(MedianStartingSalaryOfAlumniThousands)~.-TuitionFeesThousands-RoomBoardThousands, data = na.omit(college_info))
+summary(startingsalary_lm_3)
+```
+```{r, out.height='110%', out.width='150%'}
+par(mfrow=c(2,2))
+plot(startingsalary_lm_3)
+```
+After transformation, the qq-plot looks a bit more regular, and the summary shows that the Adjusted R-squared value improved from the first model, rising from 0.6864 to 0.708. For more information on why using the Adjusted R-Squared is useful in choosing a model please refer to [this](https://blog.minitab.com/blog/adventures-in-statistics-2/multiple-regession-analysis-use-adjusted-r-squared-and-predicted-r-squared-to-include-the-correct-number-of-variables) resource.
 
 ***
 
