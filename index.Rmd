@@ -2,9 +2,8 @@
 title: "320 Final Project"
 author: "Amy Vuong, Katheryn Fox, Shawdi Hootkany"
 date: "5/22/2019"
-output: html_document
+output: word_document
 margin: 1in
-
 ---
   
 ```{r setup, include=FALSE}
@@ -242,7 +241,7 @@ write.csv(formatted_college_tab, file = "college_info.csv")
 ```{r}
 formatted_college_tab <- read.csv("college_info.csv")
 formatted_college_tab <- formatted_college_tab[,-c(1)]
-formatted_college_tab
+as.tibble(formatted_college_tab)
 ```
 
 ***
