@@ -1,18 +1,46 @@
 ---
 title: "320 Final Project"
 author: "Amy, Katie, Shawdi"
-date: "5/11/2019"
+date: "5/21/2019"
 output: html_document
+margin: 1in
+
 ---
   
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(stringr)
 ```
+##Introduction: 
+Going to and succeeding in college involves a lot of different factors, from enrollment size to the cost of tuition. We will explore how these factors are related to other factors, such as graduation rate and the starting salary of gradutes. 
+
+The following dataset contains information about an array of US Universities based on National Ranking. The most important piece of information this dataset provides is the ranking of each university. There are often many assumptions made based on the ranking of a school, such as average starting salary, average tuition, and graduation rate. By having information such as tuition rate, enrollments, location, and median starting salary of alumni, we will be able to test whether there is an actual correlation between ranking and these assumptions. We will also be able to come up with our own predictions and test whether we will be able to predict information such as starting salary based on the provided information about each undergraduate institution. A couple other questions we would like to answer are as follows:
+What is the most important factor when predicting starting salary for undergraduate institutions?
+Is the cost of undergraduate tuition a key factor?
+Does undergraduate salary correlated with the male to female ratio at the institution in any kind of way?
+Which variables can be used to predict the cost of tuition?
+Which predictors are influential in this?
+Can we predict graduation rate?
+
+##Required Tools
+
+You will use R and the following libraries: 
+-ggplot2
+-rvest
+-tidyverse
+-stringr
+
 
 ## Part 1: Data Scraping
+
+The main url we will be using contains very limited information about each of the schools, such as ranking and tuition, therefore the first step that needs to be taken to be able to gain all the information we need to be able to analyze the data and make predictions is to parse the information into readable data. Detailed information about each school is spread across multiple websites so we will need to retrieve the proper url for each university from the US News website containing the ranking and then parse important information into tables that could be used for data analysis.
+
 We are scraping the data of 100 schools from https://www.usnews.com/best-colleges/rankings/national-universities.
 The data we have is stored in a text file since it loads on the page in increments. We parse the data to find the URL for each college's informational page. 
+
+Note: The information for the University of California--Davis was removed from the dataset because it didn’t contain median alumni salary, which plays a large role in our analysis. 
+
+Note: Room and Board, Tuition and Fees, and Median Alumni Salary are all in thousands of dollars.
 
 ```{r message=FALSE, warning=FALSE}
 library(rvest)
@@ -177,7 +205,7 @@ formatted_college_tab <- formatted_college_tab %>% mutate(TotalCostThousands =Tu
 
 formatted_college_tab <- na.omit(formatted_college_tab)
 nrow(formatted_college_tab)
-head(formatted_college_tab)
+as.tibble(formatted_college_tab)
 ```
 
 
@@ -355,4 +383,14 @@ plot(gradrate_lm_2)
 
 anova(gradrate_lm_2,gradrate_lm_1, test="Chisq")
 ```
+
+
+
+
+#Conclusion
+
+Being aware of all these factors in succeeding in college is very important when deciding where to go. 
+
+References: 
+-College Ranking Data: https://www.usnews.com/best-colleges/rankings/national-universities
 
