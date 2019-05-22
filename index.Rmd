@@ -1,17 +1,16 @@
 ---
 title: "320 Final Project"
-author: "Amy, Katie, Shawdi"
-date: "5/21/2019"
+author: "Amy Vuong, Katheryn Fox, Shawdi Hootkany"
+date: "5/22/2019"
 output: word_document
 margin: 1in
-
 ---
   
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 library(stringr)
 ```
-##Introduction: 
+#Introduction: 
 Going to and succeeding in college involves a lot of different factors, from enrollment size to the cost of tuition. We will explore how these factors are related to other factors, such as graduation rate and the starting salary of gradutes. 
 
 The following dataset contains information about an array of US Universities based on National Ranking. The most important piece of information this dataset provides is the ranking of each university. There are often many assumptions made based on the ranking of a school, such as average starting salary, average tuition, and graduation rate. By having information such as tuition rate, enrollments, location, and median starting salary of alumni, we will be able to test whether there is an actual correlation between ranking and these assumptions. We will also be able to come up with our own predictions and test whether we will be able to predict information such as starting salary based on the provided information about each undergraduate institution. A couple other questions we would like to answer are as follows:
@@ -30,8 +29,9 @@ You will use R and the following libraries:
 -tidyverse
 -stringr
 
+***
 
-## Part 1: Data Scraping
+#Part 1: Data Scraping
 
 The main url we will be using contains very limited information about each of the schools, such as ranking and tuition, therefore the first step that needs to be taken to be able to gain all the information we need to be able to analyze the data and make predictions is to parse the information into readable data. Detailed information about each school is spread across multiple websites so we will need to retrieve the proper url for each university from the US News website containing the ranking and then parse important information into tables that could be used for data analysis.
 
@@ -219,7 +219,9 @@ formatted_college_tab <- formatted_college_tab[,-c(1)]
 as.tibble(formatted_college_tab)
 ```
 
-## Part 2: Data Visualization
+***
+
+#Part 2: Data Visualization
 We plot the data in order to visualize relationships among the attributes. 
 ```{r fig1, fig.height = 10, fig.width = 12}
 #Starting Salary
@@ -328,9 +330,11 @@ plot_8
 ```
 Although the points are scattered with some variation, there is a general positive correlation between median starting salary of alumni and the male percentage of the student body of colleges.
 
-## Part 3: Model Fitting and Selection
+***
 
-### Fitting model for tuition prices
+#Part 3: Model Fitting and Selection
+
+##Fitting model for tuition prices
 
 ```{r}
 #adjusting dataset to remove variables not able to be used in model fitting
@@ -366,7 +370,7 @@ plot(tuition_lm_2)
 anova(tuition_lm_2,tuition_lm_1, test="Chisq")
 ```
 
-### Fitting model for graduation rate
+##Fitting model for graduation rate
 ```{r}
 #linear model fitting 
 gradrate_lm_1 <- lm(MedianStartingSalaryOfAlumniThousands~.-TuitionFeesThousands-RoomBoardThousands, data = na.omit(college_info))
@@ -386,6 +390,7 @@ anova(gradrate_lm_2,gradrate_lm_1, test="Chisq")
 
 
 
+***
 
 #Conclusion
 
