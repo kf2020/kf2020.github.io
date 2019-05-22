@@ -366,6 +366,21 @@ college_info$MalePercentage <- college_info$MalePercentage*100
 college_info$Fall2017AcceptanceRate <- college_info$Fall2017AcceptanceRate*100
 ```
 
+##Hypothesis Testing
+Hypothesis testing allows us to make a claim against what is believed to be true and through different forms of testing, determine whether there is sufficient evidence towards believing that claim is true. In the following sections conclusions will be made based on results hypothesis tests. The p-value for a model determines the significance of the model compared with a null model. A p-value smaller than our significance level indicates strong evidence against the null hypothesis, allowing us to reject the null for the alternative hypothesis. 
+
+In an example for testing whether the relationship between Tuition and School Type. Our null hypothesis states that there is no correlation between Tuition and School Type and our alternative hypothesis states that there is a relationship between those two variables. There are many ways to test a hypothesis but we will be looking at r-squared values. The r-squared value measures the degree to which the data is explained by the model.
+
+The r-squared value in the following model is about 0.54, meaning our model explains about 54% of the variation within the data. No direct conclusion can be made using the r-squared value but alongside the p-value, which is very small, it could be said that our model explains a large amount of the variation within our data, more than 50%, and is significant. We can therefore reject the null hypothesis because our model gives us results that is not consistent with the null hypothesis. There is significant evidence towards accepting the fact that there is a correlation between Tuition and School Type.
+
+```{r}
+model = lm(TuitionFeesThousands ~ SchoolType,
+           data = college_info)
+
+summary(model)
+```
+
+
 ##Fitting model for tuition prices
 First, fit the model using the [lm function](https://www.rdocumentation.org/packages/stats/versions/3.6.0/topics/lm). From R documentation: "A typical model has the form response ~ terms where response is the (numeric) response vector and terms is a series of terms which specifies a linear predictor for response." Here, we set the response variable to be tuition costs and the terms to be all variables except room and board costs and total costs, as they are extremely highly correlated (as tuition is also a part of total cost).
 ```{r}
@@ -395,8 +410,6 @@ To compare the full and reduced models, we can perform a Chi-squared Anova test.
 anova(tuition_lm_1,tuition_lm_2)
 ```
 Because the P-value is quite high for the second model, we will choose to use the first model, as there does not appear to be a significant improvement in the second model.
-
-
 
 ##Fitting model for Median Starting Salary
 Using much of the same procedure, we decided to investigate Median Starting Salaries. 
@@ -437,7 +450,12 @@ After transformation, the qq-plot looks a bit more regular, and the summary show
 
 #Conclusion
 
-Being aware of all these factors in succeeding in college is very important when deciding where to go. 
+Being aware of all these factors in succeeding in college is very important when deciding where to go. With all the high stakes involved when choosing to attend college, it's important to make sure the most worthwhile investment is made. We determined that one of largest factors of the college tuition crisis is the ability of students to pay tuition. For many the paying of tuition extends until after graduation and the starting salary of alumni after college plays a large role in assisting alumni for making those payments. 
+
+By determining which variables are significant when predicting college tuition and which were important when determining median starting salary for alumni, we were able to come up with an estimate for which colleges will assist students the most for paying the costs of their education. For example, some of the most important factors for determining tuition prices are School Type, Selectivity, and 4-year graduation rate. A student could choose to look at these values when wanting to estimate the tuition they will be paying.
+
+This dataset can be continued to be analyzed to determine many different important factors regarding college education, such as how figuring out which factors determine a university's acceptance rate. Readers could follow the steps provided for performing tests to answer questions of their own.
+
 
 References: 
 -College Ranking Data: https://www.usnews.com/best-colleges/rankings/national-universities
