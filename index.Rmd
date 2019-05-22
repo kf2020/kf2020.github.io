@@ -11,6 +11,8 @@ library(stringr)
 ```
 
 ## Part 1: Data Scraping
+We are scraping the data of 100 schools from https://www.usnews.com/best-colleges/rankings/national-universities.
+The data we have is stored in a text file since it loads on the page in increments. We parse the data to find the URL for each college's informational page. 
 
 ```{r message=FALSE, warning=FALSE}
 library(rvest)
@@ -25,6 +27,7 @@ head(college_urls)
 
 ```
 
+A data frame is created to store the information of each college in rows. Columns are initialized. 
 
 ```{r message=FALSE, warning=FALSE}
 index_num <- 0
@@ -39,6 +42,7 @@ head(college_tab_1)
 ```
 
 Below are functions used to obtain data from the website and parse it.
+
 ```{r message=FALSE, warning=FALSE}
 #retrieves of vector of size three containing the Tuition&Fees, Room&Board, and total enrollment
 get_info <- function(url_html){
@@ -84,6 +88,7 @@ get_gender_ratio <- function(url_html){
 ```
 
 Here, we use both the functions above and the html_node function to fill out the table. 
+
 ```{r, message=FALSE, warning = FALSE}
 college_tab <- college_tab_1
 
@@ -111,7 +116,8 @@ head(college_tab)
 ```
 
 
-Below, we reformat many of the columns to get usable data.
+Below, we reformat many of the columns to get usable data. Each column is categorized into the appropriate type of data. 
+
 ```{r formatting}
 formatted_college_tab <- college_tab
 #fix type of School Type, Setting, Year Founded
@@ -175,17 +181,18 @@ head(formatted_college_tab)
 ```
 
 
-``{r}
-to save as csv to easily work on it without having to reload
+```{r}
+#to save as csv to easily work on it without having to reload
 write.csv(formatted_college_tab, file = "college_info.csv")
-``
-``{r}
+```
+```{r}
 formatted_college_tab <- read.csv("college_info.csv")
 formatted_college_tab <- formatted_college_tab[,-c(1)]
 formatted_college_tab
 ```
 
 ## Part 2: Data Visualization
+We plot the data in order to visualize relationships among the attributes. 
 ```{r fig1, fig.height = 10, fig.width = 12}
 #Starting Salary
 #-histograms
@@ -198,7 +205,7 @@ plot_1
 
 ```
 
-The distribution of the median starting salary of alumni from all the school seems to be a bell-shaped curve, centering around $55,000.
+The distribution of the median starting salary of alumni from all the school seems to be a bell-shaped curve (a little skewed right), centering around $55,000.
 
 ```{r fig2, fig.height = 10, fig.width = 12}
 
@@ -213,7 +220,7 @@ plot_2
 
 ```
 
-The distribution of tution costs of all the schools is bimodal, with a range of $60,000. 
+The distribution of tution costs of all the schools is skewed left, with a range of $60,000. 
 
 ```{r fig3, fig.height = 10, fig.width = 12}
 #Acceptance rate vs graduation rate
@@ -226,14 +233,14 @@ plot_3 <- formatted_college_tab %>%
         labs(title="Acceptance Vs. Graduation Rate", x="Fall 2017 Acceptance Rate", y="Four Year Graduation Rate")
 plot_3
 ```
-There is a linear relationship between acceptance rate (Fall 2017) and the four year graduation rate. It is an overall negative relationship. The more selective, the lower the rate of graduation. 
+There is a linear relationship between acceptance rate (Fall 2017) and the four year graduation rate. It is an overall negative relationship. The higher the acceptance rate, the lower the rate of graduation. 
 
 
 ```{r fig4, fig.height = 10, fig.width = 12}
-#Boxplots of (1) gradrate & (2) admission rate by selectivity 
-
+#Boxplots of (1) gradruattion rate & (2) admission rate by selectivity 
 library(ggplot2)
-plot_4 <- formatted_college_tab %>%
+formatted_college_tab$Selectivity <- factor(formatted_college_tab$Selectivity, c("Selective","More selective","Most selective"))
+plot_4 <-  formatted_college_tab %>%
   ggplot(aes(x=Selectivity, y=FourYearGraduationRate)) +
     geom_boxplot()+
         labs(title="Graduation Rate based on Selectivity", x="Selectivity Level", y="Four Year Graduation Rate")
@@ -246,6 +253,7 @@ This is significant difference in four year graduation rates based on their Sele
 #Setting vs. room board
 
 library(ggplot2)
+formatted_college_tab$Setting <- factor(formatted_college_tab$Setting, c("Rural","Suburban","Urban", "City"))
 plot_5 <- formatted_college_tab %>%
   ggplot(aes(x=Setting, y=RoomBoardThousands)) +
     geom_boxplot()+
@@ -253,10 +261,11 @@ plot_5 <- formatted_college_tab %>%
 plot_5
 
 ```
-The boxplots of room & board costs based on setting shows that the setting of the college does influence the room and board costs for the students. The medians vary greatly. The interquartile spreads seems to be similar while the overall ranges vary.
+The boxplots of room & board costs based on setting shows that the setting of the college has some influence the room and board costs for the students. The median room and board costs of the City settingvary from that of the others. The spread is also greater for the City setting while it is much smaller for the rural setting. 
 
 ```{r fig6, fig.height = 10, fig.width = 12}
 plot_6 <- formatted_college_tab %>%
+  
   ggplot(aes(x=TotalCostThousands, y=MedianStartingSalaryOfAlumniThousands)) +
     geom_point()+ 
     geom_smooth(method=lm)+
@@ -264,7 +273,7 @@ plot_6 <- formatted_college_tab %>%
 plot_6
 ```
 
-There appears to be a positive linear relatinoship between median starting salary and total cost of colleges. The general trends shows that the more students spend on tution and room & board, the more likely that their starting salary is higher. 
+There appears to be a positive linear relationship between median starting salary and total cost of colleges. The general trends shows that the more students spend on tution, room, and board, the more likely that their starting salary is higher. 
 
 ```{r fig7, fig.height = 10, fig.width = 12}
 plot_7 <- formatted_college_tab %>%
@@ -280,6 +289,16 @@ Between school types, private colleges seem to have greater starting salaries th
   summarise(n())
 ```
 
+```{r fig8, fig.height = 10, fig.width = 12}
+plot_8 <- formatted_college_tab %>%
+  ggplot(aes(x=MalePercentage, y=MedianStartingSalaryOfAlumniThousands  
+)) +
+    geom_point()+
+  geom_smooth(method=lm)+
+        labs(title="Male Percentage vs. Median Starting Salary of Alumni  ", x="Male Percentage", y="Median Starting Salary Of Alumni (Thousands)")
+plot_8
+```
+Although the points are scattered with some variation, there is a general positive correlation between median starting salary of alumni and the male percentage of the student body of colleges.
 
 ## Part 3: Model Fitting and Selection
 
